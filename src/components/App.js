@@ -7,7 +7,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-        ReceiveDate : new Date(Math.floor(Date.now()/1000)*1000),
+        // ReceiveDate : new Date(Math.floor(Date.now()/1000)*1000),
+        ReceiveDate : this.formatDate(Date.now()),
         LotNo :'',
         Model:'',
         Customer : '',
@@ -20,6 +21,44 @@ class App extends Component {
     this.handlerChange = this.handlerChange.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
     this.textToArray = this.textToArray.bind(this);
+    this.renderLabel = this.renderLabel.bind(this);
+    this.formatDate = this.formatDate.bind(this);
+  }
+
+  formatDate(ts){
+    var date_not_formatted = new Date(ts);
+    var formatted_string = date_not_formatted.getFullYear() + "-";
+
+    if (date_not_formatted.getMonth() < 9) {
+      formatted_string += "0";
+    }
+    formatted_string += (date_not_formatted.getMonth() + 1);
+    formatted_string += "-";
+
+    if(date_not_formatted.getDate() < 10) {
+      formatted_string += "0";
+    }
+    formatted_string += date_not_formatted.getDate();
+    formatted_string += " ";
+
+    if(date_not_formatted.getHours() < 10){
+      formatted_string += "0";
+    }
+    formatted_string += date_not_formatted.getHours();
+    formatted_string += ":";
+
+    if(date_not_formatted.getMinutes() < 10){
+      formatted_string += "0";
+    }
+    formatted_string += (date_not_formatted.getMinutes());
+    formatted_string += ":";
+
+    if(date_not_formatted.getSeconds() < 10){
+      formatted_string += "0";
+    }
+    formatted_string += date_not_formatted.getSeconds();
+
+    return(formatted_string);
   }
 
   renderLabel(){
@@ -31,6 +70,10 @@ class App extends Component {
               <div className='card-body'>
                 <p><b>Model : </b>{this.state.Model}</p>
                 <p><b>Customer : </b>{this.state.Customer}</p>
+                <p><b>IssueDate : </b>{this.state.IssueDate}</p>
+                <p><b>RecieveDate : </b>{this.state.ReceiveDate}</p>
+                <p><b>DueDate : </b>{this.state.DueDate}</p>
+                <p><b>ComponentPart : </b>{this.state.ComponentPart.children}</p>
               </div>
             </div>
     )
@@ -43,7 +86,7 @@ class App extends Component {
   }
 
   handlerSubmit(e){
-
+    e.preventDefault();
   }
 
   textToArray(e){
@@ -145,6 +188,7 @@ class App extends Component {
                 <div className="form-group">
                   <label>Due Date</label>
                   <input
+                    onChange={this.handlerChange}
                     type="Date"
                     className="form-control"
                     name="DueDate"
@@ -179,6 +223,9 @@ class App extends Component {
           </div>
 
         </div>
+        <button type='submit' className='btn btn-success'>
+          Submit
+        </button>
       </div>
       </form>
     )

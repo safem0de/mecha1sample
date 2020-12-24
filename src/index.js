@@ -6,10 +6,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import reportWebVitals from './reportWebVitals';
 
+import {createStore,applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import rootReducer from './reducers';
+
+import {BrowserRouter,Switch,Route,Link} from 'react-router-dom'
+import Calendar from './components/Calendar';
+
+const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));
+
 ReactDOM.render(
   <React.StrictMode>
-    <Header/>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Header/>
+        <Switch>
+          <Route path='/' component={App} exact={true}/>
+          <Route path='/Calendar' component={Calendar} exact={true}/>
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
