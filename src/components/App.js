@@ -26,10 +26,11 @@ class App extends Component {
     return(
       <div className='card'>
               <div className='card-header'>
-                Sample : {this.state.LotNo}
+                <h3><b>Sample</b> : {this.state.LotNo}</h3>
               </div>
               <div className='card-body'>
-                <p>Model : {this.state.Model}</p>
+                <p><b>Model : </b>{this.state.Model}</p>
+                <p><b>Customer : </b>{this.state.Customer}</p>
               </div>
             </div>
     )
