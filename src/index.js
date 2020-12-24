@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from './reducers';
 
-import {BrowserRouter,Switch,Route,Link} from 'react-router-dom'
+import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Calendar from './components/Calendar';
 
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import { Example } from './Example';
+import { connect } from 'react-redux';
+import { saveSample } from '../actions/sampleActions';
 
 
 class App extends Component {
@@ -14,9 +15,9 @@ class App extends Component {
         Customer : '',
         IssueDate:'',
         DueDate : '',
-        ComponentPart : {},
-        BOM : {},
-        Process : []
+        // ComponentPart : {},
+        // BOM : {},
+        // Process : []
     }
     this.handlerChange = this.handlerChange.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
@@ -73,7 +74,7 @@ class App extends Component {
                 <p><b>IssueDate : </b>{this.state.IssueDate}</p>
                 <p><b>RecieveDate : </b>{this.state.ReceiveDate}</p>
                 <p><b>DueDate : </b>{this.state.DueDate}</p>
-                <p><b>ComponentPart : </b>{this.state.ComponentPart.children}</p>
+                {/* <p><b>ComponentPart : </b>{this.state.ComponentPart.children}</p> */}
               </div>
             </div>
     )
@@ -86,7 +87,31 @@ class App extends Component {
   }
 
   handlerSubmit(e){
+    console.log('press submit');
     e.preventDefault();
+    const sample = {
+        ReceiveDate : this.state.ReceiveDate,
+        LotNo : this.state.LotNo,
+        Model: this.state.Model,
+        Customer : this.state.Customer,
+        IssueDate: this.state.IssueDate,
+        DueDate : this.state.DueDate,
+        // ComponentPart : this.state.ComponentPart,
+        // BOM : {},
+        // Process : []
+    }
+    this.props.saveSample(sample);
+      this.setState = {
+        ReceiveDate : this.formatDate(Date.now()),
+        LotNo :'',
+        Model:'',
+        Customer : '',
+        IssueDate:'',
+        DueDate : '',
+        ComponentPart : {},
+        BOM : {},
+        Process : []
+    }
   }
 
   textToArray(e){
@@ -110,15 +135,15 @@ class App extends Component {
       }
     } catch (error) {
       alert('ใส่ข้อมูลไม่ครบถ้วน\n' + error);
-      x = document.getElementsByName("ComponentPart");
-      x[0].value = "";
+      // x = document.getElementsByName("ComponentPart");
+      // x[0].value = "";
     }
     this.setState({ComponentPart:element})
   }
 
   render(){
     return(
-      <form>
+      <form onSubmit={this.handlerSubmit}>
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-sm-8 mt-3'>
@@ -232,4 +257,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state,ownProps) {
+  return{
+    samples : state.samples
+  }
+}
+
+export default connect(mapStateToProps,{saveSample})(App);
