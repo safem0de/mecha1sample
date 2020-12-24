@@ -22,6 +22,19 @@ class App extends Component {
     this.textToArray = this.textToArray.bind(this);
   }
 
+  renderLabel(){
+    return(
+      <div className='card'>
+              <div className='card-header'>
+                Sample : {this.state.LotNo}
+              </div>
+              <div className='card-body'>
+                <p>Model : {this.state.Model}</p>
+              </div>
+            </div>
+    )
+  }
+
   handlerChange(e){
     this.setState({
       [e.target.name] : e.target.value.trim()
@@ -52,7 +65,9 @@ class App extends Component {
         }
       }
     } catch (error) {
-      alert(error);
+      alert('ใส่ข้อมูลไม่ครบถ้วน\n' + error);
+      x = document.getElementsByName("ComponentPart");
+      x[0].value = "";
     }
     this.setState({ComponentPart:element})
   }
@@ -159,14 +174,7 @@ class App extends Component {
           </div>
 
           <div className='col-sm-4 mt-3'>
-            <div className='card'>
-              <div className='card-header'>
-                test
-              </div>
-              <div className='card-body'>
-
-              </div>
-            </div>
+            {this.renderLabel()}
           </div>
 
         </div>
