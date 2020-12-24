@@ -100,7 +100,8 @@ class App extends Component {
         // BOM : {},
         // Process : []
     }
-    this.props.saveSample(sample);
+    console.log(sample.LotNo);
+    this.props.saveSample(sample,sample.LotNo);
       this.setState = {
         ReceiveDate : this.formatDate(Date.now()),
         LotNo :'',
