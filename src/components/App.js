@@ -15,9 +15,7 @@ class App extends Component {
         Customer : '',
         IssueDate:'',
         DueDate : '',
-        // ComponentPart : {},
-        // BOM : {},
-        // Process : []
+        ComponentPart : {},
     }
     this.handlerChange = this.handlerChange.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
@@ -74,7 +72,7 @@ class App extends Component {
                 <p><b>IssueDate : </b>{this.state.IssueDate}</p>
                 <p><b>RecieveDate : </b>{this.state.ReceiveDate}</p>
                 <p><b>DueDate : </b>{this.state.DueDate}</p>
-                {/* <p><b>ComponentPart : </b>{this.state.ComponentPart.children}</p> */}
+                <p><b>ComponentPart : </b>{this.state.ComponentPart.children}</p>
               </div>
             </div>
     )
@@ -96,9 +94,7 @@ class App extends Component {
         Customer : this.state.Customer,
         IssueDate: this.state.IssueDate,
         DueDate : this.state.DueDate,
-        // ComponentPart : this.state.ComponentPart,
-        // BOM : {},
-        // Process : []
+        ComponentPart : this.state.ComponentPart,
     }
     console.log(sample.LotNo);
     this.props.saveSample(sample,sample.LotNo);
@@ -131,13 +127,15 @@ class App extends Component {
               PartNo:x[2].trim(),
               Revision:y[0].trim(),
               Qty:parseInt(y[1].trim()),
+              BOM:[],
+              Process:[]
             }
         }
       }
     } catch (error) {
       alert('ใส่ข้อมูลไม่ครบถ้วน\n' + error);
-      // x = document.getElementsByName("ComponentPart");
-      // x[0].value = "";
+      x = document.getElementsByName("ComponentPart");
+      x[0].value = "";
     }
     this.setState({ComponentPart:element})
   }
