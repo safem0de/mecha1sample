@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveSample } from '../actions/sampleActions';
-
+import _ from 'lodash';
 
 class App extends Component {
 
@@ -61,21 +61,26 @@ class App extends Component {
   }
 
   renderLabel(){
+    // const i = Object.values(this.state.ComponentPart)
+    // const j = Object.keys(this.state.ComponentPart)
+
     return(
       <div className='card'>
-              <div className='card-header'>
-                <h3><b>Sample</b> : {this.state.LotNo}</h3>
-              </div>
-              <div className='card-body'>
-                <p><b>Model : </b>{this.state.Model}</p>
-                <p><b>Customer : </b>{this.state.Customer}</p>
-                <p><b>IssueDate : </b>{this.state.IssueDate}</p>
-                <p><b>RecieveDate : </b>{this.state.ReceiveDate}</p>
-                <p><b>DueDate : </b>{this.state.DueDate}</p>
-                <p><b>ComponentPart : </b>{this.state.ComponentPart.children}</p>
-              </div>
-            </div>
-    )
+          <div className='card-header'>
+              <h3><b>Sample</b> : {this.state.LotNo}</h3>
+          </div>
+          <div className='card-body'>
+              <p><b>Model : </b>{this.state.Model}</p>
+              <p><b>Customer : </b>{this.state.Customer}</p>
+              <p><b>IssueDate : </b>{this.state.IssueDate}</p>
+              <p><b>RecieveDate : </b>{this.state.ReceiveDate}</p>
+              <p><b>DueDate : </b>{this.state.DueDate}</p>
+              {
+                _.map(this.state.ComponentPart,(sample,key)=><p><b>{key} : </b>{sample.PartNo}</p>)
+              }
+          </div>
+      </div>
+    );
   }
 
   handlerChange(e){
