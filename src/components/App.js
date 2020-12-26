@@ -16,6 +16,7 @@ class App extends Component {
         IssueDate:'',
         DueDate : '',
         ComponentPart : {},
+        Finish: false
     }
     this.handlerChange = this.handlerChange.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
@@ -100,6 +101,7 @@ class App extends Component {
         IssueDate: this.state.IssueDate,
         DueDate : this.state.DueDate,
         ComponentPart : this.state.ComponentPart,
+        Finish : this.state.Finish
     }
     console.log(sample.LotNo);
     this.props.saveSample(sample,sample.LotNo);

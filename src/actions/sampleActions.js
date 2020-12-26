@@ -1,12 +1,25 @@
-// import {GET_SAMPLES} from '../actionTypes';
+import {GET_SAMPLES} from '../actionTypes';
 import {db} from '../firebase';
 
 export function getSamples(){
-    return dispatch => {}
+    return dispatch => {
+        const ref = db.collection('Samples');
+        ref.get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+        });
+
+        dispatch({
+            type: GET_SAMPLES,
+            payload : ''
+        })
+    }
 }
 
 export function saveSample(sample,lt){
-    console.log('press');
     const addSampleHandler = (obj,name) => {
         const ref = db.collection('Samples').doc(name)
         ref.set(obj).then(()=>{
