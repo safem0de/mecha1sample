@@ -62,8 +62,6 @@ class App extends Component {
   }
 
   renderLabel(){
-    // const i = Object.values(this.state.ComponentPart)
-    // const j = Object.keys(this.state.ComponentPart)
 
     return(
       <div className='card'>

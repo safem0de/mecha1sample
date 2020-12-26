@@ -1,1 +1,2 @@
-export const GET_SAMPLES = 'GET_SAMPLES'
+export const GET_SAMPLES = 'GET_SAMPLES';
+export const SAMPLES_STATUS = 'SAMPLES_STATUS';
