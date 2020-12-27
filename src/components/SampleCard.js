@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SampleDetail = props =>{
+const SampleCard = props =>{
     return(
         <div className='col-sm-3 jumbotron m-2'>
             {props.children}
@@ -8,4 +8,4 @@ const SampleDetail = props =>{
     );
 }
 
-export default SampleDetail;
+export default SampleCard;

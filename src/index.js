@@ -16,6 +16,7 @@ import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Calendar from './components/Calendar';
 import All from './components/All';
 import Loading from './components/Loading';
+import Login from './components/Login';
 import {Example} from './components/Example';
 
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Loading>
         <Header/>
         <Switch>
+          <Route path='/Login' component={Login} exact={true}/>
           <Route path='/' component={App} exact={true}/>
           <Route path='/Calendar' component={Calendar} exact={true}/>
           <Route path='/All' component={All} exact={true}/>

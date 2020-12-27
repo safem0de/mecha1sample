@@ -1,32 +1,23 @@
 import React,{ Component } from "react";
-import SampleDetail from './SampleDetail';
-import { getSamples } from "../actions/sampleActions";
+import SampleCard from './SampleCard';
+import { getSamples ,deleteSample} from "../actions/sampleActions";
 import _ from "lodash";
 import { connect } from "react-redux";
 
 class All extends Component{
-
-    constructor(props){
-        super(props);
-        this.state = {
-            ReceiveDate : '',
-            LotNo :'',
-            Model:'',
-            Customer : '',
-            IssueDate:'',
-            DueDate : '',
-            ComponentPart : {},
-            Finish: false
-        }
-      }
+    
     render(){
-
-    return _.map(this.props.samples,(samp,key)=>{
+    return _.map(this.props.samples,(sample,key)=>{
             <div className='row'>
-                <SampleDetail key={key}>
+                <SampleCard key={key}>
                     <h3>{key}</h3>
-                    <p>{samp.Model}</p>
-                </SampleDetail>
+                    <p>{sample.LotNo}</p>
+                    <button
+                        className='btn btn-danger'
+                        onClick={()=>this.props.deleteSample(key)}
+                    >
+                    Delete</button>
+                </SampleCard>
             </div>
         });
     }
@@ -34,8 +25,8 @@ class All extends Component{
 
 function mapStateToProps(state,ownProps){
     return{
-        sample : state.sample
+        samples : state.samples
     }
 }
 
-export default connect(mapStateToProps,{getSamples})(All);
+export default connect(mapStateToProps,{getSamples,deleteSample})(All);

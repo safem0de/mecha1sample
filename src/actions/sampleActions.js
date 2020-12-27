@@ -49,5 +49,13 @@ export function saveSample(sample,lt){
 }
 
 export function deleteSample(id){
-    return dispatch=> {}
+    const deleteSampleHandler = (key) => {
+        const ref = db.collection('Samples').doc(key)
+        ref.delete().then(()=>{
+            console.log('deleted');
+        }).catch((err)=>{
+            console.log(err);
+        });
+    }
+    return dispatch => deleteSampleHandler(id)
 }
