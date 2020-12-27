@@ -18,6 +18,7 @@ import All from './components/All';
 import Loading from './components/Loading';
 import Login from './components/Login';
 import Authenticate from './components/Authenticate';
+import SampleLotDetail from './components/SampleLotDetail';
 import {Example} from './components/Example';
 
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));
@@ -33,8 +34,9 @@ ReactDOM.render(
           <Authenticate>
           <Header/>
             <Route path='/' component={App} exact={true}/>
-            <Route path='/calendar' component={Calendar} exact={true}/>
             <Route path='/all' component={All} exact={true}/>
+            <Route path='/calendar' component={Calendar} exact={true}/>
+            <Route path='/all/:id' component={SampleLotDetail} exact={true}/>
             <Route path='/print' component={Example} exact={true}/>
           </Authenticate>
         </Switch>

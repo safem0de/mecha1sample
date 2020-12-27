@@ -1,4 +1,5 @@
 import React,{ Component } from "react";
+import { Link } from "react-router-dom";
 import SampleCard from './SampleCard';
 import { getSamples ,deleteSample} from "../actions/sampleActions";
 import _ from "lodash";
@@ -12,7 +13,9 @@ class All extends Component{
             console.log(key,sample.ComponentPart['SHAFT'].PartNo);
             return(
                 <SampleCard key={key}>
-                    <h3>{key}</h3>
+                    <Link to={`/all/${key}`}>
+                        <h3>{key}</h3>
+                    </Link>
                     <p>{sample.Model}</p>
                     {
                         _.map(sample.ComponentPart,(comp,key)=>{
