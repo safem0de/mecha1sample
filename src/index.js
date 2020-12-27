@@ -15,7 +15,8 @@ import rootReducer from './reducers';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Calendar from './components/Calendar';
 import All from './components/All';
-import Loading from './components/Loading'
+import Loading from './components/Loading';
+import {Example} from './components/Example';
 
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));
 
@@ -29,6 +30,7 @@ ReactDOM.render(
           <Route path='/' component={App} exact={true}/>
           <Route path='/Calendar' component={Calendar} exact={true}/>
           <Route path='/All' component={All} exact={true}/>
+          <Route path='/Print' component={Example} exact={true}/>
         </Switch>
         </Loading>
       </BrowserRouter>
