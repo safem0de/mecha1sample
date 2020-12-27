@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout ,getUser } from "../actions/userActions";
 import {Navbar,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap';
 class Header extends Component{
     render(){
@@ -22,10 +25,29 @@ class Header extends Component{
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                 <Button variant="outline-success">Search</Button>
                 </Form>
+                <ul className='nav navbar navbar-right'>
+                        {
+                            this.props.user === null ?
+                            (
+                                <li>
+                                    <Link to='/login'>Login</Link>
+                                </li>
+                            ):(
+                                <li>
+                                    <Link to='/login' onClick={()=> {this.props.logout()}}>Logout</Link>
+                                </li>
+                            )
+                        }
+                </ul>
             </Navbar.Collapse>
             </Navbar>
         )
     }
 }
+function mapStateToProps(state,ownProps){
+    return{
+        user:state.user
+    };
+}
 
-export default Header
+export default connect(mapStateToProps,{getUser,logout})(Header);

@@ -30,7 +30,7 @@ class Calendar extends Component{
 
   render(){
     return(
-      <ScheduleComponent height='700px' currentView='Month' eventSettings={{ dataSource: this.state.data }} rowAutoHeight={true}>
+      <ScheduleComponent height='auto' currentView='Month' eventSettings={{ dataSource: this.state.data }} rowAutoHeight={true}>
         {/* eventSettings={{dataSource:this.remoteData}} */}
         <Inject services={[Day,Week,WorkWeek,Month,Agenda]}/>
       </ScheduleComponent>

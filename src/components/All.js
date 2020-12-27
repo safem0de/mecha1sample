@@ -6,26 +6,42 @@ import { connect } from "react-redux";
 
 class All extends Component{
     
-    render(){
-    return _.map(this.props.samples,(sample,key)=>{
-            <div className='row'>
+    renderCard(){
+        const {samples} = this.props;
+        return _.map(samples,(sample,key)=>{
+            console.log(key,sample.ComponentPart['SHAFT'].PartNo);
+            return(
                 <SampleCard key={key}>
                     <h3>{key}</h3>
-                    <p>{sample.LotNo}</p>
+                    <p>{sample.Model}</p>
+                    {
+                        _.map(sample.ComponentPart,(comp,key)=>{
+                            return <p><b>{key} : </b><br/>{comp.PartNo}</p>
+                        })
+                    }
                     <button
                         className='btn btn-danger'
                         onClick={()=>this.props.deleteSample(key)}
                     >
                     Delete</button>
                 </SampleCard>
-            </div>
+            )
         });
+    }
+
+    render(){
+        return(
+            <div className='row'>
+                {this.renderCard()}
+            </div>
+        )
     }
 }
 
 function mapStateToProps(state,ownProps){
     return{
-        samples : state.samples
+        samples : state.samples,
+        user: state.user
     }
 }
 
