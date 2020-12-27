@@ -4,15 +4,15 @@ class Header extends Component{
     render(){
         return(
             <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/All">Mecha-Sample</Navbar.Brand>
+            <Navbar.Brand href="/all">Mecha-Sample</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="/All">Home</Nav.Link>
-                <Nav.Link href="/Calendar">Calendar</Nav.Link>
+                <Nav.Link href="/all">Home</Nav.Link>
+                <Nav.Link href="/calendar">Calendar</Nav.Link>
                 <NavDropdown title="Sample(Eng)" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/">Add New Lot</NavDropdown.Item>
-                    <NavDropdown.Item href="/Print">Print</NavDropdown.Item>
+                    <NavDropdown.Item href="/print">Print</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>

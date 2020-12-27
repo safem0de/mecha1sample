@@ -3,25 +3,29 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {getSamples} from '../actions/sampleActions';
+import {getUser} from '../actions/userActions';
 
 class Loading extends Component{
 
     componentWillMount(){
-        const {sampleLoading} = this.props;
-        if (sampleLoading === undefined){
+        const {userLoading,samplesLoading} = this.props;
+        if (samplesLoading === undefined){
             this.props.getSamples();
+        }
+        if (userLoading === undefined){
+            this.props.getUser();
         }
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.sampleLoading === -1 ){
+        if(nextProps.samplesLoading === -1 && nextProps.user !== null){
             this.props.getSamples();
         }
     }
 
     render(){
-        const {sampleLoading,children} = this.props;
-        if (!sampleLoading){
+        const {userLoading,samplesLoading,children} = this.props;
+        if ((!userLoading && !samplesLoading)||this.props.user === null){
             return(
                 <div>
                     {children}
@@ -39,9 +43,10 @@ class Loading extends Component{
 
 function mapStateToProps(state){
     return{
-        samples : state.sample,
-        sampleLoading : state.loading.samples
+        samplesLoading : state.loading.samples,
+        userLoading : state.loading.user,
+        user : state.user
     }
 }
 
-export default withRouter (connect(mapStateToProps,{getSamples})(Loading));
+export default withRouter (connect(mapStateToProps,{getSamples,getUser})(Loading));

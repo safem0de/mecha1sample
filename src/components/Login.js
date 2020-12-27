@@ -38,7 +38,7 @@ class Login extends Component {
                 </div>
                     <div className='row align-items-center justify-content-center'>
                         <button
-                            className = 'btn-sm btn-info'
+                            className = 'btn-sm btn-danger'
                             onClick = {this.props.googleLogin}
                             >
                             Sign In with Google
@@ -51,7 +51,7 @@ class Login extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.user
+        user: state.user,
     };
 }
 
