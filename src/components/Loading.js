@@ -39,6 +39,7 @@ class Loading extends Component{
 
 function mapStateToProps(state){
     return{
+        samples : state.sample,
         sampleLoading : state.loading.samples
     }
 }

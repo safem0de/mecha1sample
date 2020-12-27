@@ -8,16 +8,17 @@ export function getSamples(){
             type: SAMPLES_STATUS,
             payload: true
         });
-
+        const element = {}
         const ref = db.collection('Samples');
         ref.get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
+                    // console.log(doc.id, " => ", doc.data());
+                    element[doc.id] = doc.data()
                     dispatch({
                         type: GET_SAMPLES,
-                        payload : doc.data()
+                        payload : element
                     })
 
                     dispatch({
