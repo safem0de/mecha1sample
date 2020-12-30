@@ -96,32 +96,48 @@ class SampleLotDetail extends Component{
             return(
                 <div key={key} className='col-12'>
                     <div className='form-group'>
-                        <div className='card'>
+                        <div className='card mt-2'>
                             <div className='card-header'>{key}</div>
-                        {
-                            _.map(samp,(comp,subkey)=>{
-                                const {ComponentPart} = this.state;
-                                return(
-                                    <div key={subkey} className='form-group row'>
-                                        <label className='col-sm-3 col-form-label'>{subkey}</label>
-                                        <div className='col-sm-9'>
-                                            <input
-                                            type='text'
-                                            className='form-control'
-                                            name={subkey}
-                                            onChange={(e) => this.handlerComponentPartChange(e,key)}
-                                            value={ComponentPart[key][subkey]}
-                                        />
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                        <button
-                            className='btn btn-danger'
-                        >
-                        Delete</button>
-                        </div>
+                                <div className='card-body'>
+                                {
+                                    _.map(samp,(comp,subkey)=>{
+                                        const {ComponentPart} = this.state;
+                                        if (subkey ==='Process' || subkey ==='BOM'){
+                                            return(
+                                            <div key={subkey} className='form-group row'>
+                                                <label className='col-sm-3 col-form-label'>{subkey}</label>
+                                                <div className='col-sm-9'>
+                                                    <textarea
+                                                    rows='6'
+                                                    type='text'
+                                                    className='form-control'
+                                                    name={subkey}
+                                                    onChange={(e) => this.handlerComponentPartChange(e,key)}
+                                                    value={ComponentPart[key][subkey]}
+                                                />
+                                                </div>
+                                            </div>
+                                            )
+                                        }else{
+                                           return(
+                                            <div key={subkey} className='form-group row'>
+                                                <label className='col-sm-3 col-form-label'>{subkey}</label>
+                                                <div className='col-sm-9'>
+                                                    <input
+                                                    type='text'
+                                                    className='form-control'
+                                                    name={subkey}
+                                                    onChange={(e) => this.handlerComponentPartChange(e,key)}
+                                                    value={ComponentPart[key][subkey]}
+                                                />
+                                                </div>
+                                            </div>
+                                            ) 
+                                        }
+                                    })
+                                }
+                                </div>
+                            </div>
                     </div>
                 </div>
             )
