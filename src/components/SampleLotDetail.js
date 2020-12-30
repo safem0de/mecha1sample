@@ -114,6 +114,7 @@ class SampleLotDetail extends Component{
                                                     name={subkey}
                                                     onChange={(e) => this.handlerComponentPartChange(e,key)}
                                                     value={ComponentPart[key][subkey]}
+                                                    required
                                                 />
                                                 </div>
                                             </div>
@@ -129,6 +130,7 @@ class SampleLotDetail extends Component{
                                                     name={subkey}
                                                     onChange={(e) => this.handlerComponentPartChange(e,key)}
                                                     value={ComponentPart[key][subkey]}
+                                                    required
                                                 />
                                                 </div>
                                             </div>
@@ -149,20 +151,6 @@ class SampleLotDetail extends Component{
             <div className='container-fluid'>
                 <div className='row'>
                     <div className='col-sm-6'>
-                        {/* <div className='col-6'>
-                            <div className="form-group">
-                                <label>Lot No.</label>
-                                <input
-                                    onChange={this.handlerChange}
-                                    value={this.state.LotNo}
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="ล็อตงาน"
-                                    name="LotNo"
-                                    required
-                                    />
-                            </div>
-                        </div> */}
                         {this.renderForm()}
                     </div>
                 </div>
