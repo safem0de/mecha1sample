@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
         // ReceiveDate : new Date(Math.floor(Date.now()/1000)*1000),
         ReceiveDate : this.formatDate(Date.now()),
-        LotNo :'',
+        // LotNo :'',
         Model:'',
         Customer : '',
         IssueDate:'',
@@ -111,8 +111,6 @@ class App extends Component {
         IssueDate:'',
         DueDate : '',
         ComponentPart : {},
-        BOM : {},
-        Process : []
     }
   }
 
@@ -126,12 +124,19 @@ class App extends Component {
         if(array[i]!==""){
           var x = array[i].split('		');
           var y = x[3].trim().split('	');
+          var z = x[0].toLowerCase().trim();
           console.log(y)
-            element[x[0].trim()]={
+            element[z]={
+              // [z+'-SAP']:x[1].trim(),
+              // [z+'-PartNo']:x[2].trim(),
+              // [z+'-Revision']:y[0].trim(),
+              // [z+'-Qty']:isNaN(parseInt(y[1].trim())) ? 0 : parseInt(y[1].trim()),
+              // [z+'-BOM']:[],
+              // [z+'-Process']:[]
               SAP:x[1].trim(),
               PartNo:x[2].trim(),
               Revision:y[0].trim(),
-              Qty:parseInt(y[1].trim()),
+              Qty:isNaN(parseInt(y[1].trim())) ? 0 : parseInt(y[1].trim()),
               BOM:[],
               Process:[]
             }

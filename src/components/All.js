@@ -10,7 +10,6 @@ class All extends Component{
     renderCard(){
         const {samples} = this.props;
         return _.map(samples,(sample,key)=>{
-            console.log(key,sample.ComponentPart['SHAFT'].PartNo);
             return(
                 <SampleCard key={key}>
                     <Link to={`/all/${key}`}>
@@ -18,8 +17,8 @@ class All extends Component{
                     </Link>
                     <p>{sample.Model}</p>
                     {
-                        _.map(sample.ComponentPart,(comp,key)=>{
-                            return <p><b>{key} : </b><br/>{comp.PartNo}</p>
+                        _.map(sample.ComponentPart,(comp,subkey)=>{
+                            return <p key={subkey}><b>{subkey} : </b><br/>{comp.PartNo}</p>
                         })
                     }
                     <button

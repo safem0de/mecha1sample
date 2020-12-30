@@ -27,7 +27,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-      {/* <Header/> */}
       <Loading>
         <Switch>
           <Route path='/login' component={Login} exact={true}/>
