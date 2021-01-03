@@ -19,31 +19,33 @@ import Loading from './components/Loading';
 import Login from './components/Login';
 import Authenticate from './components/Authenticate';
 import SampleLotDetail from './components/SampleLotDetail';
-import {Example} from './components/Example';
+import Example from './components/Example';
+import ProcessInput from './components/ProcessInput';
 
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
       <Loading>
         <Switch>
           <Route path='/login' component={Login} exact={true}/>
+          <Route path='/process/:id/:sap' component={ProcessInput} exact={true}/>
           <Authenticate>
           <Header/>
             <Route path='/' component={App} exact={true}/>
             <Route path='/all' component={All} exact={true}/>
             <Route path='/calendar' component={Calendar} exact={true}/>
             <Route path='/all/:id' component={SampleLotDetail} exact={true}/>
-            <Route path='/print' component={Example} exact={true}/>
+            <Route path='/print/:id' component={Example} exact={true}/>
           </Authenticate>
         </Switch>
         </Loading>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  // </React.StrictMode>
+  ,document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

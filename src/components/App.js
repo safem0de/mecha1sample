@@ -8,9 +8,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-        // ReceiveDate : new Date(Math.floor(Date.now()/1000)*1000),
         ReceiveDate : this.formatDate(Date.now()),
-        // LotNo :'',
         Model:'',
         Customer : '',
         IssueDate:'',
@@ -127,12 +125,6 @@ class App extends Component {
           var z = x[0].toLowerCase().trim();
           console.log(y)
             element[z]={
-              // [z+'-SAP']:x[1].trim(),
-              // [z+'-PartNo']:x[2].trim(),
-              // [z+'-Revision']:y[0].trim(),
-              // [z+'-Qty']:isNaN(parseInt(y[1].trim())) ? 0 : parseInt(y[1].trim()),
-              // [z+'-BOM']:[],
-              // [z+'-Process']:[]
               SAP:x[1].trim(),
               PartNo:x[2].trim(),
               Revision:y[0].trim(),

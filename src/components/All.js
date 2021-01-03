@@ -26,6 +26,13 @@ class All extends Component{
                         onClick={()=>this.props.deleteSample(key)}
                     >
                     Delete</button>
+                    <Link to={`/print/${key}`}>
+                    <button
+                        className='btn btn-info'
+                    >
+                    Print</button>
+                    </Link>
+                    
                 </SampleCard>
             )
         });

@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import {connect} from 'react-redux';
+import { Link } from "react-router-dom";
 import _ from 'lodash';
 
 class SampleLotDetail extends Component{
@@ -7,9 +8,7 @@ class SampleLotDetail extends Component{
     constructor(props){
         super(props);
         this.state = {
-            // ReceiveDate : new Date(Math.floor(Date.now()/1000)*1000),
-            ReceiveDate : this.formatDate(Date.now()),
-            // LotNo : this.props.sample.LotNo,
+            ReceiveDate : this.props.sample.ReceiveDate,
             Model: this.props.sample.Model,
             Customer : this.props.sample.Customer,
             IssueDate: this.props.sample.IssueDate,
@@ -20,44 +19,6 @@ class SampleLotDetail extends Component{
         this.handlerChange = this.handlerChange.bind(this);
         this.handlerComponentPartChange = this.handlerComponentPartChange.bind(this);
         // this.handlerSubmit = this.handlerSubmit.bind(this);
-        this.formatDate = this.formatDate.bind(this);
-
-    }
-
-    formatDate(ts){
-        var date_not_formatted = new Date(ts);
-        var formatted_string = date_not_formatted.getFullYear() + "-";
-    
-        if (date_not_formatted.getMonth() < 9) {
-          formatted_string += "0";
-        }
-        formatted_string += (date_not_formatted.getMonth() + 1);
-        formatted_string += "-";
-    
-        if(date_not_formatted.getDate() < 10) {
-          formatted_string += "0";
-        }
-        formatted_string += date_not_formatted.getDate();
-        formatted_string += " ";
-    
-        if(date_not_formatted.getHours() < 10){
-          formatted_string += "0";
-        }
-        formatted_string += date_not_formatted.getHours();
-        formatted_string += ":";
-    
-        if(date_not_formatted.getMinutes() < 10){
-          formatted_string += "0";
-        }
-        formatted_string += (date_not_formatted.getMinutes());
-        formatted_string += ":";
-    
-        if(date_not_formatted.getSeconds() < 10){
-          formatted_string += "0";
-        }
-        formatted_string += date_not_formatted.getSeconds();
-    
-        return(formatted_string);
     }
 
     handlerChange(e){
@@ -66,34 +27,38 @@ class SampleLotDetail extends Component{
         })
     }
 
-    handlerComponentPartChange(e,key){
+    handlerComponentPartChange(e,key,bool){
         const { ComponentPart } = this.state;
-        // this.setState(prevState => ({
-        //         ComponentPart:{
-        //             ...prevState.ComponentPart,
-        //             [key]:{
-        //                 ...prevState.ComponentPart[key],
-        //                     [e.target.name] : e.target.value.trim()
-        //             }
-        //         }
-        //     })
-        // )
-        this.setState({
-            ComponentPart:{
-                ...ComponentPart,
-                [key]:{
-                    ...ComponentPart[key],
-                        [e.target.name] : e.target.value.trim()
+        if (bool === 'false'){
+           this.setState({
+                ComponentPart:{
+                    ...ComponentPart,
+                    [key]:{
+                        ...ComponentPart[key],
+                            [e.target.name] : e.target.value.trim()
+                    }
                 }
-            }
-        })
-        console.log(ComponentPart);
+            }) 
+        }else{
+            this.setState({
+                ComponentPart:{
+                    ...ComponentPart,
+                    [key]:{
+                        ...ComponentPart[key],
+                            [e.target.name] : e.target.value.trim().split('\n')
+                    }
+                }
+            }) 
+        }
+        
+        // console.log(ComponentPart);
     }
 
     renderForm(){
         const {sample} = this.props;
+        console.log(sample)
         return _.map(sample.ComponentPart,(samp,key)=>{
-            return(
+            return (
                 <div key={key} className='col-12'>
                     <div className='form-group'>
                         <div className='card mt-2'>
@@ -103,7 +68,7 @@ class SampleLotDetail extends Component{
                                     _.map(samp,(comp,subkey)=>{
                                         const {ComponentPart} = this.state;
                                         if (subkey ==='Process' || subkey ==='BOM'){
-                                            return(
+                                            return (
                                             <div key={subkey} className='form-group row'>
                                                 <label className='col-sm-3 col-form-label'>{subkey}</label>
                                                 <div className='col-sm-9'>
@@ -112,14 +77,31 @@ class SampleLotDetail extends Component{
                                                     type='text'
                                                     className='form-control'
                                                     name={subkey}
-                                                    onChange={(e) => this.handlerComponentPartChange(e,key)}
+                                                    onChange={(e) => this.handlerComponentPartChange(e,key,'true')}
                                                     value={ComponentPart[key][subkey]}
                                                     required
                                                 />
                                                 </div>
                                             </div>
                                             )
-                                        }else{
+                                        }else if(subkey ==='Qty'){
+                                            return (
+                                            <div key={subkey} className='form-group row'>
+                                                <label className='col-sm-3 col-form-label'>{subkey}</label>
+                                                <div className='col-sm-9'>
+                                                    <input
+                                                    type='number'
+                                                    className='form-control'
+                                                    name={subkey}
+                                                    onChange={(e) => this.handlerComponentPartChange(e,key,'false')}
+                                                    value={ComponentPart[key][subkey]}
+                                                    required
+                                                />
+                                                </div>
+                                            </div>
+                                            )
+                                        }
+                                        else{
                                            return(
                                             <div key={subkey} className='form-group row'>
                                                 <label className='col-sm-3 col-form-label'>{subkey}</label>
@@ -128,7 +110,7 @@ class SampleLotDetail extends Component{
                                                     type='text'
                                                     className='form-control'
                                                     name={subkey}
-                                                    onChange={(e) => this.handlerComponentPartChange(e,key)}
+                                                    onChange={(e) => this.handlerComponentPartChange(e,key,'false')}
                                                     value={ComponentPart[key][subkey]}
                                                     required
                                                 />
@@ -154,6 +136,8 @@ class SampleLotDetail extends Component{
                         {this.renderForm()}
                     </div>
                 </div>
+                <hr/>
+                    <Link to='/all'>Back</Link>
             </div>
         );
     }
