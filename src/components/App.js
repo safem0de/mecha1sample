@@ -91,7 +91,6 @@ class App extends Component {
     e.preventDefault();
     const sample = {
         ReceiveDate : this.state.ReceiveDate,
-        LotNo : this.state.LotNo,
         Model: this.state.Model,
         Customer : this.state.Customer,
         IssueDate: this.state.IssueDate,
@@ -103,7 +102,6 @@ class App extends Component {
     this.props.saveSample(sample,sample.LotNo);
       this.setState = {
         ReceiveDate : this.formatDate(Date.now()),
-        LotNo :'',
         Model:'',
         Customer : '',
         IssueDate:'',
