@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
-import { getSamples } from "../actions/sampleActions";
-import _ from "lodash";
+
+// import _ from "lodash";
 
 class ProcessInput extends Component{
 
@@ -13,8 +13,6 @@ class ProcessInput extends Component{
 
     renderSelect(){
         console.log(this.props.match.params.id);
-
-        // console.log();
         return (
             <div className="form-group">
                 <label>Process</label>
@@ -27,7 +25,6 @@ class ProcessInput extends Component{
                 </select>
             </div>
         )
-        
     }
 
     render(){
@@ -59,4 +56,4 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps,{getSamples})(ProcessInput);
+export default connect(mapStateToProps)(ProcessInput);

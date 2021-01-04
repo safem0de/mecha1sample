@@ -24,8 +24,8 @@ class Loading extends Component{
     }
 
     render(){
-        const {userLoading,samplesLoading,children} = this.props;
-        if ((!userLoading && !samplesLoading)||this.props.user === null){
+        const {userLoading,children} = this.props;
+        if ((!userLoading )||this.props.user === null){
             return(
                 <div>
                     {children}

@@ -5,7 +5,8 @@ import QRCode from "qrcode.react";
 // import _ from 'lodash';
 
 const ComponentToPrint = forwardRef((props, ref) => {
-  const url = 'http://192.168.1.246:3000'
+  const url = 'http://10.121.49.157:3000'
+  // const url = 'http://192.168.1.246:3000'
   // console.log(url);
   console.log(props['props'])
   let s,t,u,v,w = ''
@@ -31,7 +32,9 @@ const ComponentToPrint = forwardRef((props, ref) => {
         for(const [key,value] of Object.entries(obj['ComponentPart'])){
             v = key
           for(const [e_key,e_value] of Object.entries(value)){
-            if(e_key==='SAP'){
+            if(e_key==='SAP' && e_value!=='-'){
+              w = e_value;
+            }else if(e_key==='PartNo' && e_value!=='-'){
               w = e_value;
             }
           }
@@ -39,11 +42,10 @@ const ComponentToPrint = forwardRef((props, ref) => {
       }
     }
   }
-  // console.log(`${url}/process/${s}/${v}`)
+  console.log(`${url}/process/${s}/${v}`)
   } catch (error) {
     console.error(error);
   }
-  
 
   return (
     <div className="print-container" ref={ref}>
@@ -51,7 +53,7 @@ const ComponentToPrint = forwardRef((props, ref) => {
         <div className="col-sm-6 mt-3">
           <div className="card">
 
-              <div className="media">
+              <div className="media m-2">
                 <QRCode value={`${url}/process/${s}/${w}`} style={{padding:10}} />
                 <div className="media-body mt-2">
                   <h6>LotNo : {s} ({v})</h6>

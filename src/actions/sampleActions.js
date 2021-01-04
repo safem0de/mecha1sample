@@ -22,8 +22,8 @@ export function getSamples(){
                     })
 
                     dispatch({
-                        type:SAMPLES_STATUS,
-                        payload:false
+                        type: SAMPLES_STATUS,
+                        payload: false
                     })
                 });
             },()=>{
