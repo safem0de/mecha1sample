@@ -50,7 +50,6 @@ class SampleLotDetail extends Component{
                 }
             }) 
         }
-        
         // console.log(ComponentPart);
     }
 

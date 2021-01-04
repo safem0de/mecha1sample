@@ -9,10 +9,10 @@ class Calendar extends Component{
     super(props);
     const row = []
     const {samples} = this.props;
-    
+
     var count = 0
     for (const [key, value] of Object.entries(samples)) {
-      // console.log(`${key}: ${value}`);
+      console.log(`${key}: ${value}`);
       row.push({
         Id : count +1,
         Subject: key,
@@ -22,7 +22,7 @@ class Calendar extends Component{
       })
       count++;
     }
-    // console.log(row);
+    console.log(row);
     this.state = {
       data : row
     }
@@ -31,7 +31,6 @@ class Calendar extends Component{
   render(){
     return(
       <ScheduleComponent height='auto' currentView='Month' eventSettings={{ dataSource: this.state.data }} rowAutoHeight={true}>
-        {/* eventSettings={{dataSource:this.remoteData}} */}
         <Inject services={[Day,Week,WorkWeek,Month,Agenda]}/>
       </ScheduleComponent>
     );

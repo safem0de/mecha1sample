@@ -1,7 +1,6 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
-
-// import _ from "lodash";
+import _ from "lodash";
 
 class ProcessInput extends Component{
 
@@ -12,19 +11,25 @@ class ProcessInput extends Component{
     }
 
     renderSelect(){
-        console.log(this.props.match.params.id);
-        return (
-            <div className="form-group">
+        const {sample} = this.props;
+        // console.log(sample);
+
+            return(
+                <div className="form-group">
                 <label>Process</label>
                 <select className="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    {
+                        _.map(sample['ComponentPart'],(comps,keys)=>{
+                            console.log(keys,comps);
+                            if(comps['SAP']===this.props.match.params.sap || comps['SAP']===this.props.match.params.sap){
+                                console.log('yeah');
+                                return(<option>1</option>)
+                            }
+                        })
+                    }
                 </select>
-            </div>
-        )
+                </div>
+            )
     }
 
     render(){

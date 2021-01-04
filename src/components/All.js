@@ -32,7 +32,6 @@ class All extends Component{
                     >
                     Print</button>
                     </Link>
-                    
                 </SampleCard>
             )
         });
