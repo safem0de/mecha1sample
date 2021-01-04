@@ -12,21 +12,22 @@ class ProcessInput extends Component{
 
     renderSelect(){
         const {sample} = this.props;
-        // console.log(sample);
+        console.log(sample);
 
             return(
                 <div className="form-group">
                 <label>Process</label>
                 <select className="form-control">
                     {
-                        _.map(sample['ComponentPart'],(comps,keys)=>{
-                            console.log(keys,comps);
-                            if(comps['SAP']===this.props.match.params.sap || comps['SAP']===this.props.match.params.sap){
-                                console.log('yeah');
+                        _.map(sample,(comps,keys)=>{
+                            console.log('x',keys,comps);
+                            _.map(comps['ComponentPart'],(comp,key)=>{
+                                console.log('y',key,comp);
                                 return(<option>1</option>)
-                            }
+                                })
                         })
                     }
+
                 </select>
                 </div>
             )

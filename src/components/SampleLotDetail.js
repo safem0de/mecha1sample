@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from "react-router-dom";
+import { editSample } from '../actions/sampleActions';
 import _ from 'lodash';
 
 class SampleLotDetail extends Component{
@@ -18,7 +19,7 @@ class SampleLotDetail extends Component{
         }
         this.handlerChange = this.handlerChange.bind(this);
         this.handlerComponentPartChange = this.handlerComponentPartChange.bind(this);
-        // this.handlerSubmit = this.handlerSubmit.bind(this);
+        this.handlerSubmit = this.handlerSubmit.bind(this);
     }
 
     handlerChange(e){
@@ -52,6 +53,30 @@ class SampleLotDetail extends Component{
         }
         // console.log(ComponentPart);
     }
+
+    handlerSubmit(e){
+        console.log('press submit');
+        e.preventDefault();
+        const sample = {
+            ReceiveDate : this.state.ReceiveDate,
+            Model: this.state.Model,
+            Customer : this.state.Customer,
+            IssueDate: this.state.IssueDate,
+            DueDate : this.state.DueDate,
+            ComponentPart : this.state.ComponentPart,
+            Finish : this.state.Finish
+        }
+        console.log(sample.LotNo);
+        this.props.saveSample(sample,sample.LotNo);
+          this.setState = {
+            ReceiveDate : this.formatDate(Date.now()),
+            Model:'',
+            Customer : '',
+            IssueDate:'',
+            DueDate : '',
+            ComponentPart : {},
+        }
+      }
 
     renderForm(){
         const {sample} = this.props;
@@ -129,15 +154,20 @@ class SampleLotDetail extends Component{
 
     render(){
         return(
-            <div className='container-fluid'>
-                <div className='row'>
-                    <div className='col-sm-6'>
-                        {this.renderForm()}
+            <form>
+                <div className='container-fluid'>
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            {this.renderForm()}
+                        </div>
                     </div>
+                    <div className='col-sm-6'>
+                        <button className='btn btn-success'>Confirm</button>
+                    </div>
+                    <hr/>
+                        <Link to='/all'>Back</Link>
                 </div>
-                <hr/>
-                    <Link to='/all'>Back</Link>
-            </div>
+            </form>
         );
     }
 }
@@ -148,4 +178,4 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(SampleLotDetail);
+export default connect(mapStateToProps,{editSample})(SampleLotDetail);
