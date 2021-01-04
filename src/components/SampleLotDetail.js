@@ -66,8 +66,7 @@ class SampleLotDetail extends Component{
             ComponentPart : this.state.ComponentPart,
             Finish : this.state.Finish
         }
-        console.log(sample.LotNo);
-        this.props.saveSample(sample,sample.LotNo);
+        this.props.editSample(this.props.match.params.id,sample);
           this.setState = {
             ReceiveDate : this.formatDate(Date.now()),
             Model:'',
@@ -154,7 +153,7 @@ class SampleLotDetail extends Component{
 
     render(){
         return(
-            <form>
+            <form onSubmit={this.handlerSubmit}>
                 <div className='container-fluid'>
                     <div className='row'>
                         <div className='col-sm-6'>
