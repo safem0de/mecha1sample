@@ -13,6 +13,7 @@ class ProcessInput extends Component{
             EmpNo : ''
         }
         this.renderSelect = this.renderSelect.bind(this);
+        this.renderComments = this.renderComments.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -40,6 +41,30 @@ class ProcessInput extends Component{
             processinput : '',
             EmpNo : ''
         })
+    }
+
+    renderComments() {
+        const element = {}
+    element[this.props.match.params.id]={
+      ...this.props.sample
+    }
+    console.log('qqq',this.props.sample)
+    // console.log(element);
+        return _.map(element[this.props.match.params.id].comments, (comment, key) => {
+            console.log(comment);
+            if (comment.SAP === this.props.match.params.sap){
+                return (
+                <div key={key} className="alert alert-warning alert-dismissible fade show">
+                    <strong>{key}</strong>
+                    <p>{comment.processinput}</p>
+                    <p>{comment.EmpNo}</p>
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                );
+            }
+        });
     }
 
     renderSelect(){
@@ -79,9 +104,11 @@ class ProcessInput extends Component{
 
     render(){
         return(
+            <div className='container-fluid'>
+            <div className='row'>
             <form onSubmit={this.handleSubmit}>
-                <div className='container-fluid'>
-                    <div className='col-sm-4 mt-3'>
+                
+                    <div className='col-sm-12 mt-3'>
                        <h2>{this.props.match.params.id}</h2>
                        <div className="form-group">
                             <label>Part No.</label>
@@ -94,8 +121,13 @@ class ProcessInput extends Component{
                         </div>
                         <button className='btn btn-success'>Confirm</button>
                     </div>
-                </div>
+                
             </form>
+            <div className='col-sm-6 mt-3'>
+                {this.renderComments()}
+            </div>
+            </div>
+            </div>
         )
     }
 }
