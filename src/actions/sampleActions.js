@@ -29,7 +29,7 @@ export function getSamples(){
             },()=>{
                 dispatch({
                     type: SAMPLES_STATUS,
-                    payload:-1
+                    payload: -1
                 });
             }
         );

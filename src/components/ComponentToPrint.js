@@ -25,7 +25,7 @@ const ComponentToPrint = forwardRef((props, ref) => {
                 x = comp['SAP']
               }
               return (
-                <div className="col-sm-6">
+                <div className="col-sm-6" key={x}>
                     <div className="card mt-3">
                       <div className="media m-2">
                         <QRCode value={`${url}/process/${keys}/${x}`} style={{padding:10}} />

@@ -85,7 +85,7 @@ class SampleLotDetail extends Component{
                 <div key={key} className='col-sm-6'>
                     <div className='form-group'>
                         <div className='card mt-2'>
-                            <div className='card-header'>{key}</div>
+                            <div className='card-header'><b>{key}</b></div>
                                 <div className='card-body'>
                                 {
                                     _.map(samp,(comp,subkey)=>{
