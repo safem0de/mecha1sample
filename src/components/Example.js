@@ -7,13 +7,11 @@ import ComponentToPrint  from './ComponentToPrint';
 class Example extends React.PureComponent {
 
   render() {
-    // console.log(this.props.match.params.id);
+
     const element = {}
     element[this.props.match.params.id]={
       ...this.props.sample
     }
-    // console.log(element)
-    // console.log(this.props)
 
     const pStyle = `
       @page {
@@ -43,7 +41,7 @@ class Example extends React.PureComponent {
           }}
           content={() => this.componentRef}
         />
-        <ComponentToPrint 
+        <ComponentToPrint
           ref = {el => (this.componentRef = el)}
           props = {element}
           pageStyle={pStyle}
@@ -63,4 +61,3 @@ function mapStateToProps(state,ownProps){
 }
 
 export default connect(mapStateToProps)(Example);
-// export default Example;

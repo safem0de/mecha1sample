@@ -6,7 +6,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 
 class All extends Component{
-    
+
     renderCard(){
         const {samples} = this.props;
         return _.map(samples,(sample,key)=>{
