@@ -82,7 +82,7 @@ class SampleLotDetail extends Component{
         console.log(sample)
         return _.map(sample.ComponentPart,(samp,key)=>{
             return (
-                <div key={key} className='col-12'>
+                <div key={key} className='col-sm-6'>
                     <div className='form-group'>
                         <div className='card mt-2'>
                             <div className='card-header'>{key}</div>
@@ -104,6 +104,7 @@ class SampleLotDetail extends Component{
                                                     value={ComponentPart[key][subkey]}
                                                     required
                                                 />
+                                                <small className='form-text text-muted'>ไม่อนุญาติให้พิมพ์เอง (copy as-400 เท่านั้น)</small>
                                                 </div>
                                             </div>
                                             )
@@ -156,9 +157,7 @@ class SampleLotDetail extends Component{
             <form onSubmit={this.handlerSubmit}>
                 <div className='container-fluid'>
                     <div className='row'>
-                        <div className='col-sm-6'>
-                            {this.renderForm()}
-                        </div>
+                        {this.renderForm()}
                     </div>
                     <div className='col-sm-6'>
                         <button className='btn btn-success'>Confirm</button>

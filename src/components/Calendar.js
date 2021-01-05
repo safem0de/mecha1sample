@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Inject, ScheduleComponent,Day,Week,WorkWeek,Month,Agenda} from '@syncfusion/ej2-react-schedule';
 
 class Calendar extends Component{
-  
+
   constructor(props) {
     super(props);
     const row = []
@@ -12,7 +12,7 @@ class Calendar extends Component{
 
     var count = 0
     for (const [key, value] of Object.entries(samples)) {
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
       row.push({
         Id : count +1,
         Subject: key,

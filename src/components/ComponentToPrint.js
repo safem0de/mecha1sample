@@ -12,10 +12,6 @@ const ComponentToPrint = forwardRef((props, ref) => {
 
   const renderQr = () => {
     return(
-      <div>
-        <div className="row">
-          <div className="col-sm-6 mt-3">
-      {
         _.map(props['props'],(comps,keys)=>{
           console.log(keys,comps)
           return(
@@ -29,38 +25,37 @@ const ComponentToPrint = forwardRef((props, ref) => {
                 x = comp['SAP']
               }
               return (
-
-                    <div className="card m-3">
-                    <div className="media m-2">
-                      <QRCode value={`${url}/process/${keys}/${x}`} style={{padding:10}} />
-                      <div className="media-body mt-2">
-                        <h6>LotNo : {keys} ({key})</h6>
-                        <p>
-                          SAPNo : {x}
-                          <br/>
-                          ReceiveDate : {comps['ReceiveDate']}
-                          <br/>
-                          DueDate : {comps['DueDate']}
-                        </p>
+                <div className="col-sm-6">
+                    <div className="card mt-3">
+                      <div className="media m-2">
+                        <QRCode value={`${url}/process/${keys}/${x}`} style={{padding:10}} />
+                        <div className="media-body mt-2">
+                          <h6>LotNo : {keys} ({key})</h6>
+                          <p>
+                            SAPNo : {x}
+                            <br/>
+                            ReceiveDate : {comps['ReceiveDate']}
+                            <br/>
+                            DueDate : {comps['DueDate']}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  )
-                }
-              )
+                )
+              }
             )
-          }
-        )
-      }
-          </div>
-        </div>
-      </div>
+          )
+        }
+      )
     )
   }
 
   return (
     <div className="print-container" ref={ref}>
-    {renderQr()}
+      <div className="row">
+      {renderQr()}
+      </div>
     </div>
   )
 
