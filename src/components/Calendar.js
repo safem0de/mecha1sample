@@ -1,6 +1,7 @@
 import React,{ Component } from 'react';
 import {getSamples} from '../actions/sampleActions';
 import {connect} from 'react-redux';
+import { Link } from "react-router-dom";
 import {Inject, ScheduleComponent,Day,Week,WorkWeek,Month,Agenda} from '@syncfusion/ej2-react-schedule';
 
 class Calendar extends Component{
@@ -30,9 +31,13 @@ class Calendar extends Component{
 
   render(){
     return(
+      <div>
       <ScheduleComponent height='auto' currentView='Month' eventSettings={{ dataSource: this.state.data }} rowAutoHeight={true}>
         <Inject services={[Day,Week,WorkWeek,Month,Agenda]}/>
       </ScheduleComponent>
+      <hr/>
+            <Link to='/all'>Back</Link>
+      </div>
     );
   }
 }

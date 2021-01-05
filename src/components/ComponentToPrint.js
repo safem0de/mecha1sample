@@ -5,9 +5,7 @@ import QRCode from "qrcode.react";
 import _ from 'lodash';
 
 const ComponentToPrint = forwardRef((props, ref) => {
-  const url = 'http://10.121.49.157:3000'
-  // const url = 'http://192.168.1.246:3000'
-  // console.log(url);
+  const url = 'https://mecha1sample-lpb.web.app/'
   console.log(props['props'])
 
   const renderQr = () => {
