@@ -3,43 +3,45 @@ import {db} from '../firebase';
 
 export function getSamples(){
     return dispatch => {
+
         dispatch({
-            type: SAMPLES_STATUS,
-            payload: true
+            type : SAMPLES_STATUS,
+            payload : true
         });
+
         const element = {}
         const ref = db.collection('Samples').where("Finish","==",false);
         ref.get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     if (doc.exists){
-                    // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
                     element[doc.id] = doc.data();
                     }
-                    dispatch({
-                        type: GET_SAMPLES,
-                        payload : element
-                    })
+                })
+            })
 
-                    dispatch({
-                        type: SAMPLES_STATUS,
-                        payload: false
-                    })
-                });
-            },()=>{
-                dispatch({
-                    type: SAMPLES_STATUS,
-                    payload: -1
-                });
-            }
-        );
+        .then(()=>{
+            dispatch({
+                type : GET_SAMPLES,
+                payload : element
+            })
+
+            dispatch({
+                type: SAMPLES_STATUS,
+                payload: false
+            })
+        },()=>{
+            dispatch({
+                type: SAMPLES_STATUS,
+                payload: -1
+            })
+        })
     }
 }
 
-export function countSamples(Array,Type,Condition){
-
-}
+// export function countSamples(Array,Type,Condition){
+// }
 
 export function saveSample(sample,lt){
     const addSampleHandler = (obj,name) => {
