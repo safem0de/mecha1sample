@@ -114,7 +114,7 @@ class App extends Component {
     var element = {}
     var text = e.target.value;
     try {
-        var array = text.split('\n'),i;
+        var array = text.trim().split('\n'),i;
       console.log(array);
       for(i=0;i<array.length;i++){
         if(array[i]!==""){

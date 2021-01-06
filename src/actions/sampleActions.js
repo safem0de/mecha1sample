@@ -9,13 +9,13 @@ export function getSamples(){
             payload: true
         });
         const element = {}
-        const ref = db.collection('Samples');
+        const ref = db.collection('Samples').where("Finish","==",false);
         ref.get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     if (doc.exists){
                     // doc.data() is never undefined for query doc snapshots
-                    // console.log(doc.id, " => ", doc.data());
+                    console.log(doc.id, " => ", doc.data());
                     element[doc.id] = doc.data();
                     }
                     dispatch({
