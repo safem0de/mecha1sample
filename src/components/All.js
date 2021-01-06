@@ -7,6 +7,12 @@ import { connect } from "react-redux";
 
 class All extends Component{
 
+    constructor(props){
+        super(props)
+
+        this.renderCard = this.renderCard.bind(this);
+    }
+    
     renderCard(){
         const {samples} = this.props;
         return _.map(samples,(sample,key)=>{
@@ -22,13 +28,13 @@ class All extends Component{
                         })
                     }
                     <button
-                        className='btn btn-danger'
+                        className='btn btn-danger mx-1'
                         onClick={()=>this.props.deleteSample(key)}
                     >
                     Delete</button>
                     <Link to={`/print/${key}`}>
                     <button
-                        className='btn btn-info'
+                        className='btn btn-info mx-1'
                     >
                     Print</button>
                     </Link>

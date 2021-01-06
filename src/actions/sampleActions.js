@@ -15,7 +15,7 @@ export function getSamples(){
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     if (doc.exists){
-                    console.log(doc.id, " => ", doc.data());
+                    // console.log(doc.id, " => ", doc.data());
                     element[doc.id] = doc.data();
                     }
                 })

@@ -50,7 +50,8 @@ const ComponentToPrint = forwardRef((props, ref) => {
   }
 
   return (
-    <div className="print-container" ref={ref}>
+    
+    <div className="print-container" ref={ref} >
       <div className="row">
       {renderQr()}
       </div>

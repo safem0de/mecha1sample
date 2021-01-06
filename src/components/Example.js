@@ -13,24 +13,6 @@ class Example extends React.PureComponent {
       ...this.props.sample
     }
 
-    const pStyle = `
-      @page {
-        size: 75mm 25mm;
-      }
-
-      @media all {
-        .pagebreak {
-          display: none;
-        }
-      }
-
-      @media print {
-        .pagebreak {
-          page-break-before: always;
-        }
-      }
-    `;
-
     return (
       <div className='container-fluid'>
         <ReactToPrint
@@ -44,7 +26,6 @@ class Example extends React.PureComponent {
         <ComponentToPrint
           ref = {el => (this.componentRef = el)}
           props = {element}
-          pageStyle={pStyle}
           />
         <hr/>
             <Link to='/all'>Back</Link>

@@ -13,7 +13,6 @@ class Calendar extends Component{
 
     var count = 0
     for (const [key, value] of Object.entries(samples)) {
-      // console.log(`${key}: ${value}`);
       row.push({
         Id : count +1,
         Subject: key,
