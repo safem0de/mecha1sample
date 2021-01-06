@@ -21,6 +21,7 @@ import Authenticate from './components/Authenticate';
 import SampleLotDetail from './components/SampleLotDetail';
 import Example from './components/Example';
 import ProcessInput from './components/ProcessInput';
+import SampleChart from './components/SampleChart';
 
 const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)));
 
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Switch>
           <Route path='/login' component={Login} exact={true}/>
           <Route path='/process/:id/:sap' component={ProcessInput} exact={true}/>
+          <Route path='/chart' component={SampleChart} exact={true}/>
           <Authenticate>
           <Header/>
             <Route path='/' component={App} exact={true}/>
