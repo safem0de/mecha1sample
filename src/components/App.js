@@ -14,7 +14,8 @@ class App extends Component {
         IssueDate:'',
         DueDate : '',
         ComponentPart : {},
-        Finish: false
+        Finish: false,
+        Zone : ''
     }
     this.handlerChange = this.handlerChange.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
@@ -96,7 +97,8 @@ class App extends Component {
         IssueDate: this.state.IssueDate,
         DueDate : this.state.DueDate,
         ComponentPart : this.state.ComponentPart,
-        Finish : this.state.Finish
+        Finish : this.state.Finish,
+        Zone : this.state.Zone
     }
     // console.log(sample.LotNo);
     this.props.saveSample(sample,this.state.LotNo);
@@ -107,6 +109,7 @@ class App extends Component {
         IssueDate:'',
         DueDate : '',
         ComponentPart : {},
+        Zone : ''
     }
   }
 
@@ -218,6 +221,26 @@ class App extends Component {
                     name="DueDate"
                     required
                     />
+                </div>
+              </div>
+
+              <div className='col-sm-4'>
+                <div className="form-group">
+                  <label>Shipping Zone</label>
+                  <select
+                    className="form-control"
+                    defaultValue=""
+                    name="Zone"
+                    onChange={this.handlerChange}
+                    value={this.state.Zone}>
+                  <option value="" disabled="disabled">กรุณาระบุ...โซน</option>
+                    <option>China</option>
+                    <option>Japan</option>
+                    <option>Korea</option>
+                    <option>Europe</option>
+                    <option>America</option>
+                    <option>Other</option>
+                  </select>
                 </div>
               </div>
 
