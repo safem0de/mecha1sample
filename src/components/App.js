@@ -98,8 +98,8 @@ class App extends Component {
         ComponentPart : this.state.ComponentPart,
         Finish : this.state.Finish
     }
-    console.log(sample.LotNo);
-    this.props.saveSample(sample,sample.LotNo);
+    // console.log(sample.LotNo);
+    this.props.saveSample(sample,this.state.LotNo);
       this.setState = {
         ReceiveDate : this.formatDate(Date.now()),
         Model:'',
