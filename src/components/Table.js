@@ -15,6 +15,7 @@ class Table extends React.Component {
         const { samples } = this.props;
         // console.log(samples)
         return(
+            <div class="table-responsive">
             <table className="table table-sm table-hover text-center">
             <thead className="thead-dark">
                 <tr>
@@ -46,7 +47,6 @@ class Table extends React.Component {
                         if (value['DueDate']!==undefined){
                             const date1 = new Date(value['DueDate']);
                             const date2 = Date.now();
-                            // console.log('Diff',getDifferenceInDays(date1, date2));
                             diff = Math.round(getDifferenceInDays(date1, date2));
                         }
 
@@ -95,12 +95,11 @@ class Table extends React.Component {
                             let sap
                             let process_arr = []
                             for(const [k,v] of Object.entries(value['comments'])){
-                                // console.log('y',k,v,v['processinput']);
                                 arr.push(Date.parse(k));
                                 process_arr.push(v['processinput']);
                                 sap = v['SAP']
                             }
-                            // console.log('Date',Date.now());
+
                             console.log('Date',arr);
                             console.log('process',process_arr);
                             var result = arr.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
@@ -150,6 +149,7 @@ class Table extends React.Component {
                 }
             </tbody>
             </table>
+            </div>
         )
     }
     render(){
@@ -158,7 +158,7 @@ class Table extends React.Component {
             <h3>Sample Situation</h3>
             {this.renderSample()}
 
-            <footer className='bg-light' style={{bottom:5, width:'100%'}}>
+            <footer className='bg-light mb-0' style={{width:'100%'}}>
                 <hr/>
                 <div className='row mx-2'>
                     <p>&copy; Mecha Parts (ENG) - Safem0de</p>
