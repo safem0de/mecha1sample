@@ -1,6 +1,8 @@
 import React ,{ Component } from "react";
 import {connect} from 'react-redux';
 import {googleLogin} from '../actions/userActions';
+import {Link} from 'react-router-dom'
+import Footer from "./Footer";
 
 class Login extends Component {
     componentWillMount(){
@@ -44,6 +46,15 @@ class Login extends Component {
                             Sign In with Google
                         </button>
                     </div>
+                <Footer>
+                    <div className='col-sm-auto'>
+                        <Link to='/chart'>Go to Chart</Link>
+                    </div>
+
+                    <div className='col-sm-auto'>
+                        <Link to='/table'>Go to Sample Situation</Link>
+                    </div>
+                </Footer>
             </div>
         )
     }

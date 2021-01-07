@@ -16,9 +16,9 @@ class Header extends Component{
                 <Nav.Link href="/calendar">Calendar</Nav.Link>
                 <NavDropdown title="Sample(Eng)" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/">Add New Lot</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                    <NavDropdown.Item href="/chart">Summary Chart</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    <NavDropdown.Item href="/table">Sample Situation</NavDropdown.Item>
                 </NavDropdown>
                 </Nav>
                 <Form inline>

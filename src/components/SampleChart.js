@@ -1,6 +1,8 @@
 // https://codesandbox.io/s/zwxo5l6jvl?file=/src/LineDemo.js
 import React, {Component} from 'react';
 import { Bar } from 'react-chartjs-2';
+import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -73,9 +75,20 @@ const data = {
 export default class SampleChart extends Component {
   render() {
     return (
-      <div className='container'>
-        <h2>Sample Summary</h2>
-        <Bar ref="chart" data={data} />
+      <div className='container-fluid'>
+        <div className='container'>
+          <h2>Sample Summary</h2>
+          <Bar ref="chart" data={data} />
+        </div>
+        <Footer>
+        <div className='col-sm-auto'>
+          <Link to='/login'>Go to Login</Link>
+        </div>
+
+        <div className='col-sm-auto'>
+            <Link to='/table'>Go to Sample Situation</Link>
+        </div>
+        </Footer>
       </div>
     );
   }

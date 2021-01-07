@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer'
 import { getSamples } from "../actions/sampleActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -157,22 +158,17 @@ class Table extends React.Component {
         <div className='container-fluid'>
             <h3>Sample Situation</h3>
             {this.renderSample()}
+            <Footer>
 
-            <footer className='bg-light mb-0' style={{width:'100%'}}>
-                <hr/>
-                <div className='row mx-2'>
-                    <p>&copy; Mecha Parts (ENG) - Safem0de</p>
-
-                    <div className='col-sm-auto'>
-                        <Link to='/chart'>Go to Chart</Link>
-                    </div>
-
-                    <div className='col-sm-auto'>
-                        <Link to='/all'>See All Samples</Link>
-                    </div>
-
+                <div className='col-sm-auto'>
+                    <Link to='/login'>Go to Login</Link>
                 </div>
-            </footer>
+
+                <div className='col-sm-auto'>
+                    <Link to='/chart'>Go to Chart</Link>
+                </div>
+
+            </Footer>
         </div>
         )
     }
