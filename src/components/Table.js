@@ -1,6 +1,7 @@
 import React from 'react';
 import { getSamples } from "../actions/sampleActions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Table extends React.Component {
     
@@ -12,7 +13,7 @@ class Table extends React.Component {
 
     renderSample(){
         const { samples } = this.props;
-        console.log(samples)
+        // console.log(samples)
         return(
             <table className="table table-sm table-hover text-center">
             <thead className="thead-dark">
@@ -22,43 +23,35 @@ class Table extends React.Component {
                 <th scope="col">IssueDate</th>
                 <th scope="col">ReceiveDate</th>
                 <th scope="col">DueDate</th>
-                <th scope="col">shaft (status)</th>
-                <th scope="col">rotor ass'y (status)</th>
-                <th scope="col">stator stack (status)</th>
-                <th scope="col">front flange (status)</th>
-                <th scope="col">rear flange (status)</th>
-                <th scope="col">cover (status)</th>
-                <th scope="col">follow up!</th>
+                <th scope="col">Shaft<br/>(status)</th>
+                <th scope="col">Rotor ass'y<br/>(status)</th>
+                <th scope="col">Stator stack<br/>(status)</th>
+                <th scope="col">Front flange<br/>(status)</th>
+                <th scope="col">Rear flange<br/>(status)</th>
+                <th scope="col">Cover<br/>(status)</th>
+                <th scope="col">Follow up!</th>
                 </tr>
             </thead>
             <tbody>
-                {/* <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                </tr> */}
-                
                 {
                     Object.entries(samples).map(([key,value],index)=>{
-                        console.log(key,value,index,value['ComponentPart'],value['comments'])
-                        let sh,rt,st,ff,rf,cv = null
+                        // console.log(key,value,index,value['ComponentPart'],value['comments'])
+                        let sh,rt,st,ff,rf,cv,diff = null
+
+                        function getDifferenceInDays(date1, date2) {
+                            const diffInMs = Math.abs(date2 - date1);
+                            return diffInMs / (1000 * 60 * 60 * 24);
+                          }
+
+                        if (value['DueDate']!==undefined){
+                            const date1 = new Date(value['DueDate']);
+                            const date2 = Date.now();
+                            // console.log('Diff',getDifferenceInDays(date1, date2));
+                            diff = Math.round(getDifferenceInDays(date1, date2));
+                        }
 
                         if (value['ComponentPart']!==undefined){
                             for(const [k,v] of Object.entries(value['ComponentPart'])){
-                                console.log('x',k,v)
                                 if (k === 'shaft' && v['SAP']!=='-'){
                                     sh = v['SAP']
                                     console.log(v)
@@ -97,13 +90,46 @@ class Table extends React.Component {
                                 }
                             }
                         }
-                        
                         if (value['comments']!==undefined){
+                            let arr = []
+                            let sap
+                            let process_arr = []
                             for(const [k,v] of Object.entries(value['comments'])){
-                                console.log('y',k,v)
+                                // console.log('y',k,v,v['processinput']);
+                                arr.push(Date.parse(k));
+                                process_arr.push(v['processinput']);
+                                sap = v['SAP']
+                            }
+                            // console.log('Date',Date.now());
+                            console.log('Date',arr);
+                            console.log('process',process_arr);
+                            var result = arr.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+                            console.log(process_arr[result]);
+
+                            if(sh === sap){
+                                sh += "\n("+ process_arr[result] +")"
+                            }
+
+                            if(rt === sap){
+                                rt += "\n("+ process_arr[result] +")"
+                            }
+
+                            if(st === sap){
+                                st += "\n("+ process_arr[result] +")"
+                            }
+
+                            if(ff === sap){
+                                ff += "\n("+ process_arr[result] +")"
+                            }
+
+                            if(rf === sap){
+                                rf += "\n("+ process_arr[result] +")"
+                            }
+
+                            if(cv === sap){
+                                cv += "\n("+ process_arr[result] +")"
                             }
                         }
-                        
                         return(
                             <tr key={index+1}>
                                 <th scope="row">{index+1}</th>
@@ -117,25 +143,39 @@ class Table extends React.Component {
                                 <td>{ff===null?'-':ff}</td>
                                 <td>{rf===null?'-':rf}</td>
                                 <td>{cv===null?'-':cv}</td>
+                                <td>{diff<=1?'Urgent !!':diff +' Days left'}</td>
                             </tr>
                         )
                     })
                 }
             </tbody>
             </table>
-            
         )
     }
-    
     render(){
         return(
         <div className='container-fluid'>
-            test
+            <h3>Sample Situation</h3>
             {this.renderSample()}
+
+            <footer style={{position:'fixed',bottom:5, width:'100%'}}>
+                <hr/>
+                <div className='row mx-2'>
+                    <p>&copy; Mecha Parts (ENG) - Safem0de</p>
+
+                    <div className='col-sm-auto'>
+                        <Link to='/chart'>Go to Chart</Link>
+                    </div>
+
+                    <div className='col-sm-auto'>
+                        <Link to='/all'>See All Samples</Link>
+                    </div>
+
+                </div>
+            </footer>
         </div>
         )
     }
-    
 }
 
 function mapStateToProps(state,ownProps){

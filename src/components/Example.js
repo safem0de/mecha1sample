@@ -27,8 +27,10 @@ class Example extends React.PureComponent {
           ref = {el => (this.componentRef = el)}
           props = {element}
           />
-        <hr/>
+        <footer>
+          <hr/>
             <Link to='/all'>Back</Link>
+        </footer>
       </div>
     );
   }
