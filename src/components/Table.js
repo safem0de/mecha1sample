@@ -1,8 +1,10 @@
+// https://stackoverflow.com/questions/42526032/how-to-find-if-element-with-specific-id-exists-or-not
 import React from 'react';
 import Footer from './Footer'
 import { getSamples } from "../actions/sampleActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import XLSX from "xlsx";
 
 class Table extends React.Component {
     
@@ -10,14 +12,24 @@ class Table extends React.Component {
         super(props)
 
         this.renderSample = this.renderSample.bind(this);
+        this.exportFile = this.exportFile.bind(this);
+    }
+
+    exportFile() {
+        console.log('Download Click')
+        var myEle = document.getElementById('tableau');
+        if(myEle){
+            var workbook = XLSX.utils.table_to_book(document.getElementById('tableau'));
+            XLSX.writeFile(workbook, 'sample.xlsb');
+        }
     }
 
     renderSample(){
         const { samples } = this.props;
         // console.log(samples)
         return(
-            <div class="table-responsive">
-            <table className="table table-sm table-hover text-center">
+            <div className="table-responsive">
+            <table className="table table-sm table-hover text-center" id='tableau'>
             <thead className="thead-dark">
                 <tr>
                 <th scope="col">#</th>
@@ -172,6 +184,13 @@ class Table extends React.Component {
 
                 <div className='col-sm-auto'>
                     <Link to='/chart'>Go to Chart</Link>
+                </div>
+
+                <div className='col-sm-auto ml-auto'>
+                    <button
+                        className='btn btn-info'
+                        onClick={this.exportFile}
+                    >Download</button>
                 </div>
 
             </Footer>

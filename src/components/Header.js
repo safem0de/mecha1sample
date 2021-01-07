@@ -7,7 +7,7 @@ class Header extends Component{
 
     render(){
         return(
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="sm">
             <Navbar.Brand href="/all">Mecha-Sample</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
