@@ -158,7 +158,7 @@ class Table extends React.Component {
             <h3>Sample Situation</h3>
             {this.renderSample()}
 
-            <footer style={{position:'fixed',bottom:5, width:'100%'}}>
+            <footer className='bg-light' style={{bottom:5, width:'100%'}}>
                 <hr/>
                 <div className='row mx-2'>
                     <p>&copy; Mecha Parts (ENG) - Safem0de</p>
