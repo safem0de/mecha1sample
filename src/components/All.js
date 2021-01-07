@@ -38,6 +38,11 @@ class All extends Component{
                     >
                     Print</button>
                     </Link>
+                    <button
+                        className='btn btn-primary mx-1'
+                        // onClick={}
+                    >
+                    Finished</button>
                 </SampleCard>
             )
         });

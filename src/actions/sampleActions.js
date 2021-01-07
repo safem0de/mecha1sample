@@ -40,8 +40,8 @@ export function getSamples(){
     }
 }
 
-// export function countSamples(Array,Type,Condition){
-// }
+export function countSamples(){
+}
 
 export function saveSample(sample,lt){
     const addSampleHandler = (obj,name) => {

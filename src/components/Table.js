@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import XLSX from "xlsx";
 
 class Table extends React.Component {
-    
+
     constructor(props){
         super(props)
 
@@ -34,6 +34,7 @@ class Table extends React.Component {
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">LotNo</th>
+                <th scope="col">Zone</th>
                 <th scope="col">IssueDate</th>
                 <th scope="col">ReceiveDate</th>
                 <th scope="col">DueDate</th>
@@ -152,6 +153,7 @@ class Table extends React.Component {
                             <tr key={index+1}>
                                 <th scope="row">{index+1}</th>
                                 <td>{key}</td>
+                                <td>{value['Zone']===null?'-':value['Zone']}</td>
                                 <td>{value['IssueDate']===null?'-':value['IssueDate']}</td>
                                 <td>{value['ReceiveDate']===null?'-':value['ReceiveDate']}</td>
                                 <td>{value['DueDate']===null?'-':value['DueDate']}</td>
