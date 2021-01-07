@@ -38,7 +38,13 @@ class Table extends React.Component {
                 {
                     Object.entries(samples).map(([key,value],index)=>{
                         // console.log(key,value,index,value['ComponentPart'],value['comments'])
-                        let sh,rt,st,ff,rf,cv,diff = null
+                        var sh = null
+                        var rt = null
+                        var st = null
+                        var ff = null
+                        var rf = null
+                        var cv = null
+                        var diff = 0
 
                         function getDifferenceInDays(date1, date2) {
                             const diffInMs = Math.abs(date2 - date1);
@@ -107,27 +113,27 @@ class Table extends React.Component {
                             console.log(process_arr[result]);
 
                             if(sh === sap){
-                                sh += "\n("+ process_arr[result] +")"
+                                sh+=("\n("+ process_arr[result] +")")
                             }
 
                             if(rt === sap){
-                                rt += "\n("+ process_arr[result] +")"
+                                rt+=("\n("+ process_arr[result] +")")
                             }
 
                             if(st === sap){
-                                st += "\n("+ process_arr[result] +")"
+                                st+=("\n("+ process_arr[result] +")")
                             }
 
                             if(ff === sap){
-                                ff += "\n("+ process_arr[result] +")"
+                                ff+=("\n("+ process_arr[result] +")")
                             }
 
                             if(rf === sap){
-                                rf += "\n("+ process_arr[result] +")"
+                                rf+=("\n("+ process_arr[result] +")")
                             }
 
                             if(cv === sap){
-                                cv += "\n("+ process_arr[result] +")"
+                                cv+=("\n("+ process_arr[result] +")")
                             }
                         }
                         return(
