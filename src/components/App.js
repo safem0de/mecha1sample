@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveSample } from '../actions/sampleActions';
+import { convert } from "../actions/Actions";
 import _ from 'lodash';
 
 class App extends Component {
@@ -8,7 +9,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-        ReceiveDate : this.formatDate(Date.now()),
+        ReceiveDate : convert(Date.now()),
         Model:'',
         Customer : '',
         IssueDate:'',
@@ -21,43 +22,6 @@ class App extends Component {
     this.handlerSubmit = this.handlerSubmit.bind(this);
     this.textToArray = this.textToArray.bind(this);
     this.renderLabel = this.renderLabel.bind(this);
-    this.formatDate = this.formatDate.bind(this);
-  }
-
-  formatDate(ts){
-    var date_not_formatted = new Date(ts);
-    var formatted_string = date_not_formatted.getFullYear() + "-";
-
-    if (date_not_formatted.getMonth() < 9) {
-      formatted_string += "0";
-    }
-    formatted_string += (date_not_formatted.getMonth() + 1);
-    formatted_string += "-";
-
-    if(date_not_formatted.getDate() < 10) {
-      formatted_string += "0";
-    }
-    formatted_string += date_not_formatted.getDate();
-    formatted_string += " ";
-
-    if(date_not_formatted.getHours() < 10){
-      formatted_string += "0";
-    }
-    formatted_string += date_not_formatted.getHours();
-    formatted_string += ":";
-
-    if(date_not_formatted.getMinutes() < 10){
-      formatted_string += "0";
-    }
-    formatted_string += (date_not_formatted.getMinutes());
-    formatted_string += ":";
-
-    if(date_not_formatted.getSeconds() < 10){
-      formatted_string += "0";
-    }
-    formatted_string += date_not_formatted.getSeconds();
-
-    return(formatted_string);
   }
 
   renderLabel(){
@@ -103,7 +67,7 @@ class App extends Component {
     // console.log(sample.LotNo);
     this.props.saveSample(sample,this.state.LotNo);
       this.setState = {
-        ReceiveDate : this.formatDate(Date.now()),
+        ReceiveDate : convert(Date.now()),
         Model:'',
         Customer : '',
         IssueDate:'',
