@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
+import { getSampleGraph } from "../actions/sampleActions";
+import { connect } from 'react-redux';
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -71,8 +73,7 @@ const data = {
 
   ]
 };
-
-export default class SampleChart extends Component {
+class SampleChart extends Component {
   render() {
     return (
       <div className='container-fluid'>
@@ -93,8 +94,13 @@ export default class SampleChart extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   const { datasets } = this.refs.chart.chartInstance.data
-  //   console.log(datasets[0].data);
-  // }
+  componentDidMount() {
+    const { datasets } = this.refs.chart.chartInstance.data
+    console.log(datasets[0].data);
+
+    this.props.getSampleGraph('January');
+  }
 }
+
+
+export default connect(null,{getSampleGraph})(SampleChart);

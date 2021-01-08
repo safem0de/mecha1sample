@@ -1,5 +1,5 @@
 import {GET_SAMPLES,SAMPLES_STATUS} from '../actionTypes';
-import {formatDate} from './Actions'
+import {formatDate,getDaysInMonth} from './Actions'
 import {db} from '../firebase';
 
 export function getSamples(){
@@ -16,7 +16,6 @@ export function getSamples(){
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     if (doc.exists){
-                    // console.log(doc.id, " => ", doc.data());
                     element[doc.id] = doc.data();
                     }
                 })
@@ -42,7 +41,28 @@ export function getSamples(){
 }
 
 export function getSampleGraph(Type){
-    const genDataset = (label,rgb) =>{
+    console.log('test')
+    var year = new Date().getUTCFullYear()
+    var month = [];
+    for (let index = 1; index <= 12; index++) {
+        month.push(new Date(Date.parse(index +" 1,"+ year)).toLocaleString('en-us', { month: 'long' }))
+    }
+
+    // var m_name = month.some(function(x){return x === Type;});
+    // console.log(m_name);
+
+    if (Type === 'Month'){
+        console.log(year);
+        console.log(month);
+    }else if(month.some((x)=>{return x === Type})){
+        var x = new Date(Date.parse(Type +" 1,"+ year)).getMonth()
+        var Days = getDaysInMonth(x,year)
+        console.log('daily')
+        console.log(Days)
+    }
+
+
+    const genDataset = (label,rgb,data_arr) =>{
 
         const genRGBa = (r,g,b,a) =>{
             return('rgba('+ r+','+ g+','+ b+','+a+')')
@@ -69,12 +89,12 @@ export function getSampleGraph(Type){
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: data_arr
         }
         return struct;
     }
 
-    return dispatch => genDataset()
+    return dispatch => {}
 }
 
 export function saveSample(sample,lt){
