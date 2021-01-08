@@ -63,6 +63,7 @@ class SampleChart extends Component {
     );
   }
 }
+
 function mapStateToProps(state,ownProps){
   return{
       chart : state.chart
