@@ -1,5 +1,6 @@
+// https://stackoverflow.com/questions/52953145/maximum-value-from-firebase-firestore-collection
 import {GET_SAMPLES,SAMPLES_STATUS} from '../actionTypes';
-import {formatDate,getDaysInMonth} from './Actions'
+import {convert,formatDate,getDaysInMonth} from './Actions'
 import {db} from '../firebase';
 
 export function getSamples(){
@@ -44,6 +45,7 @@ export function getSampleGraph(Type){
     console.log('test')
     var year = new Date().getUTCFullYear()
     var month = [];
+    var label = [];
     for (let index = 1; index <= 12; index++) {
         month.push(new Date(Date.parse(index +" 1,"+ year)).toLocaleString('en-us', { month: 'long' }))
     }
@@ -54,12 +56,27 @@ export function getSampleGraph(Type){
     if (Type === 'Month'){
         console.log(year);
         console.log(month);
+        label = month
     }else if(month.some((x)=>{return x === Type})){
         var x = new Date(Date.parse(Type +" 1,"+ year)).getMonth()
         var Days = getDaysInMonth(x,year)
+        label = Days
         console.log('daily')
         console.log(Days)
     }
+
+    var data = [];
+    for (let i = 0; i < label.length; i++) {
+        // const element = array[index];
+        x = convert(label[i],'MM')
+        db.collection('Samples').where("DueDate","==",x)
+            .get().then(snap => {
+            // var size = snap.size // will return the collection size
+            // console.log(size);
+            data.push(snap.size);
+        });
+    }
+    console.log('Confirm',data);
 
 
     const genDataset = (label,rgb,data_arr) =>{

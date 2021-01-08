@@ -1,10 +1,40 @@
 // https://codesandbox.io/s/zwxo5l6jvl?file=/src/LineDemo.js
+// https://github.com/reactchartjs/react-chartjs-2/issues/388
 import React, {Component} from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import { getSampleGraph } from "../actions/sampleActions";
 import { connect } from 'react-redux';
+
+const options = {
+  layout: {
+    padding: {
+      bottom: 0,
+      top: 0
+    }
+  },
+  scales: {
+    xAxes: [{
+      stacked: true,
+      gridLines: {
+        display: false
+      },
+    }],
+    yAxes: [{
+      stacked: true,
+        }],
+  },
+      responsive: true,
+        legend: {
+          display: true,
+          position: 'right',
+          labels: {
+            fontColor: '#91929b',
+            padding: 20
+          }
+        }
+      };
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -48,7 +78,7 @@ const data = {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 35]
+        data: [60, 59, 80, 77, 56, 55, 35]
       },{
         label: 'Shipment',
         fill: false,
@@ -70,7 +100,6 @@ const data = {
         pointHitRadius: 10,
         data: [65, 59, 77, 81, 56, 55, 47]
       }
-
   ]
 };
 class SampleChart extends Component {
@@ -79,7 +108,7 @@ class SampleChart extends Component {
       <div className='container-fluid'>
         <div className='container'>
           <h2>Sample Summary</h2>
-          <Bar ref="chart" data={data} />
+          <Bar ref="chart" data={data} options={options}/>
         </div>
         <Footer>
         <div className='col-sm-auto'>

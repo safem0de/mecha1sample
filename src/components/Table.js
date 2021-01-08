@@ -25,8 +25,7 @@ class Table extends React.Component {
     }
 
     renderSample(){
-        const { samples } = this.props;
-        // console.log(samples)
+
         return(
             <div className="table-responsive">
             <table className="table table-sm table-hover text-center" id='tableau'>
@@ -49,124 +48,7 @@ class Table extends React.Component {
             </thead>
             <tbody>
                 {
-                    Object.entries(samples).map(([key,value],index)=>{
-                        // console.log(key,value,index,value['ComponentPart'],value['comments'])
-                        var sh = null
-                        var rt = null
-                        var st = null
-                        var ff = null
-                        var rf = null
-                        var cv = null
-                        var diff = 0
 
-                        function getDifferenceInDays(date1, date2) {
-                            const diffInMs = Math.abs(date2 - date1);
-                            return diffInMs / (1000 * 60 * 60 * 24);
-                          }
-
-                        if (value['DueDate']!==undefined){
-                            const date1 = new Date(value['DueDate']);
-                            const date2 = Date.now();
-                            diff = Math.round(getDifferenceInDays(date1, date2));
-                        }
-
-                        if (value['ComponentPart']!==undefined){
-                            for(const [k,v] of Object.entries(value['ComponentPart'])){
-                                if (k === 'shaft' && v['SAP']!=='-'){
-                                    sh = v['SAP']
-                                    console.log(v)
-                                }else if (k === 'shaft' && v['SAP']==='-'){
-                                    sh = v['PartNo']
-                                }
-
-                                if (k === "rotor ass'y" && v['SAP']!=='-'){
-                                    rt = v['SAP']
-                                }else if (k === "rotor ass'y" && v['SAP']==='-'){
-                                    rt = v['PartNo']
-                                }
-
-                                if (k === "stator stack" && v['SAP']!=='-'){
-                                    st = v['SAP']
-                                }else if (k === "stator stack" && v['SAP']==='-'){
-                                    st = v['PartNo']
-                                }
-
-                                if (k === "front flange" && v['SAP']!=='-'){
-                                    ff = v['SAP']
-                                }else if (k === "front flange" && v['SAP']==='-'){
-                                    ff = v['PartNo']
-                                }
-
-                                if (k === "rear flange" && v['SAP']!=='-'){
-                                    rf = v['SAP']
-                                }else if (k === "rear flange" && v['SAP']==='-'){
-                                    rf = v['PartNo']
-                                }
-
-                                if (k === "cover" && v['SAP']!=='-'){
-                                    cv = v['SAP']
-                                }else if (k === "cover" && v['SAP']==='-'){
-                                    cv = v['PartNo']
-                                }
-                            }
-                        }
-                        if (value['comments']!==undefined){
-                            let arr = []
-                            let sap
-                            let process_arr = []
-                            for(const [k,v] of Object.entries(value['comments'])){
-                                arr.push(Date.parse(k));
-                                process_arr.push(v['processinput']);
-                                sap = v['SAP']
-                            }
-
-                            console.log('Date',arr);
-                            console.log('process',process_arr);
-                            var result = arr.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
-                            console.log(process_arr[result]);
-
-                            if(sh === sap){
-                                sh+=("\n("+ process_arr[result] +")")
-                            }
-
-                            if(rt === sap){
-                                rt+=("\n("+ process_arr[result] +")")
-                            }
-
-                            if(st === sap){
-                                st+=("\n("+ process_arr[result] +")")
-                            }
-
-                            if(ff === sap){
-                                ff+=("\n("+ process_arr[result] +")")
-                            }
-
-                            if(rf === sap){
-                                rf+=("\n("+ process_arr[result] +")")
-                            }
-
-                            if(cv === sap){
-                                cv+=("\n("+ process_arr[result] +")")
-                            }
-                        }
-                        return(
-                            <tr key={index+1}>
-                                <th scope="row">{index+1}</th>
-                                <td>{key}</td>
-                                <td>{value['Zone']===null?'-':value['Zone']}</td>
-                                <td>{value['IssueDate']===null?'-':value['IssueDate']}</td>
-                                <td>{value['ReceiveDate']===null?'-':value['ReceiveDate']}</td>
-                                <td>{value['DueDate']===null?'-':value['DueDate']}</td>
-                                <td>{sh===null?'-':sh}</td>
-                                <td>{rt===null?'-':rt}</td>
-                                <td>{st===null?'-':st}</td>
-                                <td>{ff===null?'-':ff}</td>
-                                <td>{rf===null?'-':rf}</td>
-                                <td>{cv===null?'-':cv}</td>
-                                <td>{diff<=1?'Urgent !!':diff +' Days left'}</td>
-                            </tr>
-                        )
-                    })
                 }
             </tbody>
             </table>
