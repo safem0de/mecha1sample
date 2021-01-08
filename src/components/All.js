@@ -1,7 +1,8 @@
 import React,{ Component } from "react";
 import { Link } from "react-router-dom";
 import SampleCard from './SampleCard';
-import { getSamples ,deleteSample} from "../actions/sampleActions";
+import { formatDate } from '../actions/Actions'
+import { getSamples ,deleteSample,editSample} from "../actions/sampleActions";
 import _ from "lodash";
 import { connect } from "react-redux";
 
@@ -10,12 +11,27 @@ class All extends Component{
     constructor(props){
         super(props)
 
+        this.handlerSubmit = this.handlerSubmit.bind(this);
         this.renderCard = this.renderCard.bind(this);
     }
-    
+
+    handlerSubmit(e,id){
+        console.log('press finished',id);
+        e.preventDefault();
+        const sample = {
+            Finish:true,
+            FinishDate:formatDate(Date.now())
+        }
+        this.props.editSample(id,sample);
+          this.setState = {
+            Finish:false,
+        }
+    }
+
     renderCard(){
         const {samples} = this.props;
         return _.map(samples,(sample,key)=>{
+            // console.log(key)
             return(
                 <SampleCard key={key}>
                     <Link to={`/all/${key}`}>
@@ -40,7 +56,7 @@ class All extends Component{
                     </Link>
                     <button
                         className='btn btn-primary mx-1'
-                        // onClick={}
+                        onClick={(e)=>this.handlerSubmit(e,key)}
                     >
                     Finished</button>
                 </SampleCard>
@@ -64,4 +80,4 @@ function mapStateToProps(state,ownProps){
     }
 }
 
-export default connect(mapStateToProps,{getSamples,deleteSample})(All);
+export default connect(mapStateToProps,{getSamples,deleteSample,editSample})(All);

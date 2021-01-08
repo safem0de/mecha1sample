@@ -39,7 +39,7 @@ class SampleLotDetail extends Component{
                             [e.target.name] : e.target.value.trim()
                     }
                 }
-            }) 
+            })
         }else{
             this.setState({
                 ComponentPart:{
@@ -49,7 +49,7 @@ class SampleLotDetail extends Component{
                             [e.target.name] : e.target.value.trim().split('\n')
                     }
                 }
-            }) 
+            })
         }
         // console.log(ComponentPart);
     }
@@ -75,7 +75,7 @@ class SampleLotDetail extends Component{
             DueDate : '',
             ComponentPart : {},
         }
-      }
+    }
 
     renderForm(){
         const {sample} = this.props;
