@@ -193,17 +193,16 @@ class App extends Component {
                   <label>Shipping Zone</label>
                   <select
                     className="form-control"
-                    defaultValue=""
-                    name="Zone"
+                    name="zone"
                     onChange={this.handlerChange}
                     value={this.state.Zone}>
                   <option value="" disabled="disabled">กรุณาระบุ...โซน</option>
-                    <option>China</option>
-                    <option>Japan</option>
-                    <option>Korea</option>
-                    <option>Europe</option>
-                    <option>America</option>
-                    <option>Other</option>
+                    <option zone='China'>China</option>
+                    <option zone='Japan'>Japan</option>
+                    <option zone='Korea'>Korea</option>
+                    <option zone='Europe'>Europe</option>
+                    <option zone='America'>America</option>
+                    <option zone='Other'>Other</option>
                   </select>
                 </div>
               </div>
@@ -213,7 +212,7 @@ class App extends Component {
             <div className='row'>
               <div className='col-sm-12'>
                 <div className="form-group">
-                <label>Part Mecha2</label>
+                <label>Part Mecha</label>
                 <textarea
                   type="text"
                   onChange={this.textToArray}

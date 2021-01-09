@@ -1,4 +1,5 @@
 // https://www.codegrepper.com/code-examples/delphi/js+convert+month+number+to+month+name
+// https://stackoverflow.com/questions/54857222/find-all-values-by-specific-key-in-a-deep-nested-object/54857283#54857283
 export function formatDate(ts){
     var date_not_formatted = new Date(ts);
     var formatted_string = date_not_formatted.getFullYear() + "-";
@@ -63,4 +64,14 @@ export function getDaysInMonth(month, year) {
     date.setDate(date.getDate() + 1);
   }
   return days;
+}
+
+var idArray = []
+export function func(obj) {
+  idArray.push(obj.id)
+  if (!obj.children) {
+    return
+  }
+
+  obj.children.forEach(child => func(child))
 }

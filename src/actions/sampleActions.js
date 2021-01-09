@@ -1,6 +1,6 @@
 // https://stackoverflow.com/questions/52953145/maximum-value-from-firebase-firestore-collection
 import {GET_SAMPLES,SAMPLES_STATUS,GET_CHART} from '../actionTypes';
-import {convert,formatDate,getDaysInMonth} from './Actions'
+import {convert,getDaysInMonth} from './Actions'
 import {db} from '../firebase';
 
 export function getSamples(){
@@ -41,7 +41,11 @@ export function getSamples(){
     }
 }
 
-export function getSampleGraph(Type,Things){
+export function getSituation(){
+
+}
+
+export function getSampleGraph(Type,Things){ // Month Not finish
 
     const getDataCount = (lbl,doc_key) => {
         var data = [];
@@ -97,7 +101,6 @@ export function getSampleGraph(Type,Things){
         return struct;
     }
 
-    // console.log('test')
     var year = new Date().getUTCFullYear()
     var month = [];
     var label_x = [];
@@ -105,46 +108,38 @@ export function getSampleGraph(Type,Things){
         month.push(new Date(Date.parse(index +" 1,"+ year)).toLocaleString('en-us', { month: 'long' }))
     }
 
-    // var m_name = month.some(function(x){return x === Type;});
-    // console.log(m_name);
-
     if (Type === 'Month'){
-        // console.log(year);
-        // console.log(month);
         label_x = month
     }else if(month.some((x)=>{return x === Type})){
         var x = new Date(Date.parse(Type +" 1,"+ year)).getMonth()
         var Days = getDaysInMonth(x,year)
         label_x = Days
-        // console.log('daily')
-        // console.log(Days)
     }
     
     var datasets = [];
     var a,b,c,d = null;
     for (let i = 0; i < Things.length; i++) {
-        // console.log(Things[i]);
         if (Things[i]==='Receive'){
             a = Things[i]
-            b = genRGBa(47,79,79,1)
-            c = genRGBa(47,79,79,0.4)
+            b = genRGBa(47,79,79,0.8)
+            c = genRGBa(47,79,79,1)
             d = getDataCount(label_x,"ReceiveDate");
             datasets.push(genDataset(a,b,c,d));
         }else if (Things[i]==='Confirm'){
             a = Things[i]
-            b = genRGBa(72,209,204,1)
-            c = genRGBa(72,209,204,0.4)
+            b = genRGBa(72,209,204,0.8)
+            c = genRGBa(72,209,204,1)
             d = getDataCount(label_x,"DueDate");
             datasets.push(genDataset(a,b,c,d));
         }else if (Things[i]==='Shipment'){
             a = Things[i]
-            b = genRGBa(135,206,250,1)
-            c = genRGBa(135,206,250,0.4)
+            b = genRGBa(135,206,250,0.8)
+            c = genRGBa(135,206,250,1)
             d = getDataCount(label_x,"FinishDate");
             datasets.push(genDataset(a,b,c,d));
         }
     }
-    // console.log(datasets);
+
     const datas = {
         labels:label_x,
         datasets:datasets
@@ -200,14 +195,14 @@ export function editSample(id,sample){
     return dispatch => editSampleHandler(id,sample)
 }
 
-export function saveComment(sampleLot,process_with_id){
+export function saveComment(id,sap,date_process){
 
-    const addCommentHandler = (doc,obj) => {
+    const addCommentHandler = (doc,sap,obj) => {
         const ref = db.collection('Samples').doc(doc);
             ref
                 .set(
                 {comments:{
-                    [formatDate(Date.now())] : obj
+                    [sap] : obj
                 }},{merge:true}
                 ).then(()=> {
                     console.log("Document successfully updated!");
@@ -216,5 +211,5 @@ export function saveComment(sampleLot,process_with_id){
                     console.error("Update document: ", err);
                 });
     }
-    return dispatch => addCommentHandler(sampleLot,process_with_id);
+    return dispatch => addCommentHandler(id,sap,date_process);
 }

@@ -14,7 +14,7 @@ const ComponentToPrint = forwardRef((props, ref) => {
           console.log(keys,comps)
           return(
             _.map(comps['ComponentPart'],(comp,key)=>{
-              let x =''
+              let x = ''
               console.log('CompPart',key,comp);
               console.log('x',comp['SAP']);
               if(comp['SAP']==='-'){
@@ -28,7 +28,7 @@ const ComponentToPrint = forwardRef((props, ref) => {
                       <div className="media m-2">
                         <QRCode value={`${url}/process/${keys}/${x}`} style={{padding:10}} />
                         <div className="media-body mt-2">
-                          <h6>LotNo : {keys} ({key})</h6>
+                          <h6>LotNo : {keys} ({key}) {comp['Qty']} Pcs.</h6>
                           <p>
                             SAPNo : {x}
                             <br/>

@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
     samples : sampleReducer,
     loading : loadingReducer,
     user : userReducer,
-    chart: chartReducer,
+    chart : chartReducer,
 })
 
 export default rootReducer;

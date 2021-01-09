@@ -25,7 +25,7 @@ class Table extends React.Component {
     }
 
     renderSample(){
-
+        console.log(Date.now());
         return(
             <div className="table-responsive">
             <table className="table table-sm table-hover text-center" id='tableau'>
@@ -48,7 +48,12 @@ class Table extends React.Component {
             </thead>
             <tbody>
                 {
-
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
                 }
             </tbody>
             </table>
