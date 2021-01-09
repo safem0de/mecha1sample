@@ -1,7 +1,7 @@
 // https://stackoverflow.com/questions/42526032/how-to-find-if-element-with-specific-id-exists-or-not
 import React from 'react';
 import Footer from './Footer'
-import { getSamples } from "../actions/sampleActions";
+import { getSituation } from "../actions/sampleActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import XLSX from "xlsx";
@@ -15,6 +15,10 @@ class Table extends React.Component {
         this.exportFile = this.exportFile.bind(this);
     }
 
+    componentDidMount(){
+        this.props.getSituation();
+    }
+
     exportFile() {
         console.log('Download Click')
         var myEle = document.getElementById('tableau');
@@ -25,7 +29,7 @@ class Table extends React.Component {
     }
 
     renderSample(){
-        console.log(Date.now());
+        // console.log(Date.now());
         return(
             <div className="table-responsive">
             <table className="table table-sm table-hover text-center" id='tableau'>
@@ -88,9 +92,9 @@ class Table extends React.Component {
     }
 }
 
-function mapStateToProps(state,ownProps){
-    return{
-        samples : state.samples,
-    }
-}
-export default connect(mapStateToProps,{getSamples})(Table);
+// function mapStateToProps(state,ownProps){
+//     return{
+//         samples : state.samples,
+//     }
+// }
+export default connect(null,{getSituation})(Table);

@@ -43,6 +43,56 @@ export function getSamples(){
 
 export function getSituation(){
 
+    const getData = (obj,key) =>{
+        var val = ''
+        if(obj[key] !== undefined){
+            if (obj[key].SAP!=='-'){
+                val = obj[key].SAP
+            }else{
+                val = obj[key].PartNo
+            }
+        }else{
+            val = '-'
+        }
+        return val
+    }
+    var no = 0
+    const datas = []
+    const ref = db.collection('Samples').where("Finish","==",false);
+    ref.get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                var lotno = ''
+                var zone = ''
+                var shaft = ''
+                var rotor = ''
+                var stator = ''
+                var front = ''
+                var rear = ''
+                var cover = ''
+                if (doc.exists){
+
+                    no++
+                    lotno = doc.id
+                    // zone = doc.data().Zone
+                    shaft = getData(doc.data().ComponentPart,"shaft");
+                    rotor = getData(doc.data().ComponentPart,"rotor ass'y");
+                    stator = getData(doc.data().ComponentPart,"stator stack");
+                    front = getData(doc.data().ComponentPart,"front flange");
+                    rear = getData(doc.data().ComponentPart,"rear flange");
+                    cover = getData(doc.data().ComponentPart,"cover");
+
+                }
+                var obj = {no,lotno,zone,shaft,rotor,stator,front,rear,cover}
+                console.log(obj);
+                datas.push(obj);
+
+            })
+        })
+
+    return dispatch => {
+        // console.log(datas)
+    }
 }
 
 export function getSampleGraph(Type,Things){ // Month Not finish
