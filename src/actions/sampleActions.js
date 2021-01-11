@@ -42,8 +42,16 @@ export function getSamples(){
 }
 
 export function getSituation(){
-
     const getData = (obj,key) =>{
+        var val = ''
+        if(obj[key] !== undefined){
+            val = obj[key]
+        }else{
+            val = '-'
+        }
+        return val
+    }
+    const getDataSap = (obj,key) =>{
         var val = ''
         if(obj[key] !== undefined){
             if (obj[key].SAP!=='-'){
@@ -64,6 +72,9 @@ export function getSituation(){
             querySnapshot.forEach(function(doc) {
                 var lotno = ''
                 var zone = ''
+                var issue = ''
+                var receive = ''
+                var duedate = ''
                 var shaft = ''
                 var rotor = ''
                 var stator = ''
@@ -74,16 +85,19 @@ export function getSituation(){
 
                     no++
                     lotno = doc.id
-                    // zone = doc.data().Zone
-                    shaft = getData(doc.data().ComponentPart,"shaft");
-                    rotor = getData(doc.data().ComponentPart,"rotor ass'y");
-                    stator = getData(doc.data().ComponentPart,"stator stack");
-                    front = getData(doc.data().ComponentPart,"front flange");
-                    rear = getData(doc.data().ComponentPart,"rear flange");
-                    cover = getData(doc.data().ComponentPart,"cover");
+                    zone = getData(doc.data(),"Zone");
+                    issue = getData(doc.data(),"IssueDate");
+                    receive = getData(doc.data(),"ReceiveDate");
+                    duedate = getData(doc.data(),"DueDate");
+                    shaft = getDataSap(doc.data().ComponentPart,"shaft");
+                    rotor = getDataSap(doc.data().ComponentPart,"rotor ass'y");
+                    stator = getDataSap(doc.data().ComponentPart,"stator stack");
+                    front = getDataSap(doc.data().ComponentPart,"front flange");
+                    rear = getDataSap(doc.data().ComponentPart,"rear flange");
+                    cover = getDataSap(doc.data().ComponentPart,"cover");
 
                 }
-                var obj = {no,lotno,zone,shaft,rotor,stator,front,rear,cover}
+                var obj = {no,lotno,zone,issue,receive,duedate,shaft,rotor,stator,front,rear,cover}
                 console.log(obj);
                 datas.push(obj);
 
