@@ -52,7 +52,7 @@ class ProcessInput extends Component{
     }
 
         return _.map(element[this.props.match.params.id].comments, (comment, key) => {
-            // console.log(comment);
+            console.log(comment);
             // console.log(typeof key);
             if (comment.PartNo === this.props.match.params.sap){
                 return (
