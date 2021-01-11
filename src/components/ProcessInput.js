@@ -2,15 +2,16 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
 import _ from "lodash";
-import { formatDate } from "../actions/Actions";
+// import { formatDate } from "../actions/Actions";
 import { saveComment } from "../actions/sampleActions";
+import { formatDate } from '../actions/Actions';
 
 class ProcessInput extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            DateComment : Date.now(),
+            PartNo : this.props.match.params.sap,
             processinput : '',
             Ok : 0,
             EmpNo : '',
@@ -30,14 +31,14 @@ class ProcessInput extends Component{
     handleSubmit(e){
         e.preventDefault();
         const sampleInput = {
-            DateComment : this.state.DateComment,
+            PartNo : this.state.PartNo,
             processinput : this.state.processinput,
             Ok : this.state.Ok,
             EmpNo : this.state.EmpNo
         }
-        this.props.saveComment(this.props.match.params.id,this.props.match.params.sap,sampleInput);                
+        this.props.saveComment(this.props.match.params.id,sampleInput);
         this.setState({
-            DateComment : 0,
+            PartNo : this.props.match.params.sap,
             processinput : '',
             Ok : 0,
             EmpNo : ''
@@ -51,11 +52,12 @@ class ProcessInput extends Component{
     }
 
         return _.map(element[this.props.match.params.id].comments, (comment, key) => {
-            console.log(comment);
-            if (key === this.props.match.params.sap){
+            // console.log(comment);
+            // console.log(typeof key);
+            if (comment.PartNo === this.props.match.params.sap){
                 return (
-                <div key={comment.DateComment} className="alert alert-warning alert-dismissible fade show">
-                    <strong>{formatDate(comment.DateComment)}</strong>
+                <div key={key} className="alert alert-warning alert-dismissible fade show">
+                    <strong>{formatDate(parseInt(key))}</strong>
                     <p>{comment.processinput}</p>
                     <p>OK : {comment.Ok} Pcs.</p>
                     <p>{comment.EmpNo}</p>
@@ -112,7 +114,7 @@ class ProcessInput extends Component{
                        <h2>{this.props.match.params.id}</h2>
                        <div className="form-group">
                             <label>Part No.</label>
-                            <input type="text" className="form-control" value={this.props.match.params.sap} readOnly/>
+                            <input type="text" className="form-control" name="PartNo" value={this.props.match.params.sap} readOnly/>
                         </div>
                         {this.renderSelect()}
                         <div className="form-group">

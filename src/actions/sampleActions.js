@@ -247,12 +247,12 @@ export function editSample(id,sample){
 
 export function saveComment(id,sap,date_process){
 
-    const addCommentHandler = (doc,sap,obj) => {
+    const addCommentHandler = (doc,obj) => {
         const ref = db.collection('Samples').doc(doc);
             ref
                 .set(
                 {comments:{
-                    [sap] : obj
+                    [Date.now()] : obj
                 }},{merge:true}
                 ).then(()=> {
                     console.log("Document successfully updated!");
