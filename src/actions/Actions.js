@@ -66,12 +66,3 @@ export function getDaysInMonth(month, year) {
   return days;
 }
 
-var idArray = []
-export function func(obj) {
-  idArray.push(obj.id)
-  if (!obj.children) {
-    return
-  }
-
-  obj.children.forEach(child => func(child))
-}

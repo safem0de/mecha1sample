@@ -1,6 +1,7 @@
 // https://stackoverflow.com/questions/42526032/how-to-find-if-element-with-specific-id-exists-or-not
 import React from 'react';
 import Footer from './Footer'
+import {getDifferenceInDays} from '../actions/Actions';
 import { getSituation } from "../actions/sampleActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,9 +16,9 @@ class Table extends React.Component {
         this.exportFile = this.exportFile.bind(this);
     }
 
-    componentDidMount(){
-        this.props.getSituation();
-    }
+    // componentDidMount(){
+    //     this.props.getSituation();
+    // }
 
     exportFile() {
         console.log('Download Click')
@@ -29,7 +30,37 @@ class Table extends React.Component {
     }
 
     renderSample(){
-        // console.log(Date.now());
+        const {table} = this.props;
+        console.log(table);
+
+        const renderDetails = (sample,index)=>{
+            var x = getDifferenceInDays(Date.parse(sample.duedate),Date.now())
+            var status = ''
+            if (x <= 1){
+                status = 'Urgent!!'
+            }else{
+                status = Math.round(x) + ' Days left'
+            }
+
+            return(
+                <tr key={index}>
+                <th scope="row">{sample.no}</th>
+                <td>{sample.lotno}</td>
+                <td>{sample.zone}</td>
+                <td>{sample.issue}</td>
+                <td>{sample.receive}</td>
+                <td>{sample.duedate}</td>
+                <td>{sample.shaft}<br/>({sample._shaft})</td>
+                <td>{sample.rotor}<br/>({sample._rotor})</td>
+                <td>{sample.stator}<br/>({sample._stator})</td>
+                <td>{sample.front}<br/>({sample._front})</td>
+                <td>{sample.rear}<br/>({sample._rear})</td>
+                <td>{sample.cover}<br/>({sample._cover})</td>
+                <td>{status}</td>
+            </tr>
+            )
+        }
+
         return(
             <div className="table-responsive">
             <table className="table table-sm table-hover text-center" id='tableau'>
@@ -52,12 +83,7 @@ class Table extends React.Component {
             </thead>
             <tbody>
                 {
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>
+                    table.map(renderDetails)
                 }
             </tbody>
             </table>
@@ -92,9 +118,9 @@ class Table extends React.Component {
     }
 }
 
-// function mapStateToProps(state,ownProps){
-//     return{
-//         samples : state.samples,
-//     }
-// }
-export default connect(null,{getSituation})(Table);
+function mapStateToProps(state,ownProps){
+    return{
+        table : state.table,
+    }
+}
+export default connect(mapStateToProps,{getSituation})(Table);

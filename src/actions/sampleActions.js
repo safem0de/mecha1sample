@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/52953145/maximum-value-from-firebase-firestore-collection
-import {GET_SAMPLES,SAMPLES_STATUS,GET_CHART} from '../actionTypes';
+import {GET_SAMPLES,SAMPLES_STATUS,GET_CHART,GET_TABLE} from '../actionTypes';
 import {convert,getDaysInMonth} from './Actions'
 import {db} from '../firebase';
 
@@ -137,6 +137,10 @@ export function getSituation(){
 
     return dispatch => {
         console.log(datas)
+        dispatch({
+            type : GET_TABLE,
+            payload : datas
+        })
     }
 }
 
