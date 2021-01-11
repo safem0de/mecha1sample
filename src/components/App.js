@@ -193,16 +193,16 @@ class App extends Component {
                   <label>Shipping Zone</label>
                   <select
                     className="form-control"
-                    name="zone"
+                    name="Zone"
                     onChange={this.handlerChange}
                     value={this.state.Zone}>
                   <option value="" disabled="disabled">กรุณาระบุ...โซน</option>
-                    <option zone='China'>China</option>
-                    <option zone='Japan'>Japan</option>
-                    <option zone='Korea'>Korea</option>
-                    <option zone='Europe'>Europe</option>
-                    <option zone='America'>America</option>
-                    <option zone='Other'>Other</option>
+                    <option Zone='China'>China</option>
+                    <option Zone='Japan'>Japan</option>
+                    <option Zone='Korea'>Korea</option>
+                    <option Zone='Europe'>Europe</option>
+                    <option Zone='America'>America</option>
+                    <option Zone='Other'>Other</option>
                   </select>
                 </div>
               </div>
