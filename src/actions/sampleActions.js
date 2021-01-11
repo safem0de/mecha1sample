@@ -64,6 +64,24 @@ export function getSituation(){
         }
         return val
     }
+
+    const getStatus = (obj,part) =>{
+        var max = 0;
+        // console.log(part)
+        for (var property in obj) {
+            max = (max < parseFloat(property)) ? parseFloat(property) : max;
+        }
+        
+        if(max !== 0 && obj[max].PartNo === part){
+            // console.log(obj[max].PartNo === part)
+            console.log(obj[max].processinput);
+            return obj[max].processinput;
+        }else{
+            return '-';
+        }
+        
+    }
+
     var no = 0
     const datas = []
     const ref = db.collection('Samples').where("Finish","==",false);
@@ -81,6 +99,12 @@ export function getSituation(){
                 var front = ''
                 var rear = ''
                 var cover = ''
+                var _shaft = ''
+                var _rotor = ''
+                var _stator = ''
+                var _front = ''
+                var _rear = ''
+                var _cover = ''
                 if (doc.exists){
 
                     no++
@@ -95,9 +119,16 @@ export function getSituation(){
                     front = getDataSap(doc.data().ComponentPart,"front flange");
                     rear = getDataSap(doc.data().ComponentPart,"rear flange");
                     cover = getDataSap(doc.data().ComponentPart,"cover");
+                    // console.log(doc.data().comments)
+                    _shaft = getStatus(doc.data().comments,shaft)
+                    _rotor = getStatus(doc.data().comments,rotor)
+                    _stator = getStatus(doc.data().comments,stator)
+                    _front = getStatus(doc.data().comments,front)
+                    _rear = getStatus(doc.data().comments,rear)
+                    _cover = getStatus(doc.data().comments,cover)
 
                 }
-                var obj = {no,lotno,zone,issue,receive,duedate,shaft,rotor,stator,front,rear,cover}
+                var obj = {no,lotno,zone,issue,receive,duedate,shaft,rotor,stator,front,rear,cover,_shaft,_rotor,_stator,_front,_rear,_cover}
                 console.log(obj);
                 datas.push(obj);
 
@@ -105,7 +136,7 @@ export function getSituation(){
         })
 
     return dispatch => {
-        // console.log(datas)
+        console.log(datas)
     }
 }
 
