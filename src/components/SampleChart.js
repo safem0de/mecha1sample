@@ -8,7 +8,7 @@ import { getSampleGraph } from "../actions/sampleActions";
 import { connect } from 'react-redux';
 
 class SampleChart extends Component {
-  
+
   render() {
     const {chart} = this.props
     const options = {

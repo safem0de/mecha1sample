@@ -1,7 +1,7 @@
 import React,{ Component } from "react";
 import { Link } from "react-router-dom";
 import SampleCard from './SampleCard';
-import { formatDate } from '../actions/Actions'
+import { convert } from '../actions/Actions'
 import { getSamples ,deleteSample,editSample} from "../actions/sampleActions";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -20,7 +20,7 @@ class All extends Component{
         e.preventDefault();
         const sample = {
             Finish:true,
-            FinishDate:formatDate(Date.now())
+            FinishDate:convert(Date.now(),'MM')
         }
         this.props.editSample(id,sample);
           this.setState = {

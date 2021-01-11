@@ -9,7 +9,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-        ReceiveDate : convert(Date.now()),
+        // LotNo : '',
+        ReceiveDate : convert(Date.now(),'MM'),
         Model:'',
         Customer : '',
         IssueDate:'',
@@ -37,6 +38,7 @@ class App extends Component {
               <p><b>IssueDate : </b>{this.state.IssueDate}</p>
               <p><b>RecieveDate : </b>{this.state.ReceiveDate}</p>
               <p><b>DueDate : </b>{this.state.DueDate}</p>
+              <p><b>Zone : </b>{this.state.Zone}</p>
               {
                 _.map(this.state.ComponentPart,(sample,key)=><p><b>{key} : </b>{sample.PartNo}</p>)
               }
@@ -64,10 +66,10 @@ class App extends Component {
         Finish : this.state.Finish,
         Zone : this.state.Zone
     }
-    // console.log(sample.LotNo);
+    console.log(sample);
     this.props.saveSample(sample,this.state.LotNo);
       this.setState = {
-        ReceiveDate : convert(Date.now()),
+        ReceiveDate : convert(Date.now(),'MM'),
         Model:'',
         Customer : '',
         IssueDate:'',
@@ -197,12 +199,12 @@ class App extends Component {
                     onChange={this.handlerChange}
                     value={this.state.Zone}>
                   <option value="" disabled="disabled">กรุณาระบุ...โซน</option>
-                    <option Zone='China'>China</option>
-                    <option Zone='Japan'>Japan</option>
-                    <option Zone='Korea'>Korea</option>
-                    <option Zone='Europe'>Europe</option>
-                    <option Zone='America'>America</option>
-                    <option Zone='Other'>Other</option>
+                    <option zone='China'>China</option>
+                    <option zone='Japan'>Japan</option>
+                    <option zone='Korea'>Korea</option>
+                    <option zone='Europe'>Europe</option>
+                    <option zone='America'>America</option>
+                    <option zone='Other'>Other</option>
                   </select>
                 </div>
               </div>
