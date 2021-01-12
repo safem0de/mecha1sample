@@ -45,7 +45,12 @@ class All extends Component{
                     }
                     <button
                         className='btn btn-danger mx-1'
-                        onClick={()=>this.props.deleteSample(key)}
+                        onClick={()=>{
+                            if(window.confirm('Delete '.concat(`${key} ?`))){
+                                this.props.deleteSample(key)
+                                    }
+                                }
+                            }
                     >
                     Delete</button>
                     <Link to={`/print/${key}`}>
@@ -56,7 +61,12 @@ class All extends Component{
                     </Link>
                     <button
                         className='btn btn-primary mx-1'
-                        onClick={(e)=>this.handlerSubmit(e,key)}
+                        onClick={(e)=>{
+                            if(window.confirm('LotNo '.concat(`${key} Finish?`))){
+                                this.handlerSubmit(e,key)
+                                    }
+                                }
+                            }
                     >
                     Finished</button>
                 </SampleCard>
