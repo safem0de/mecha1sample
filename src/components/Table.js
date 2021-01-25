@@ -15,10 +15,6 @@ class Table extends React.Component {
         this.exportFile = this.exportFile.bind(this);
     }
 
-    componentDidMount(){
-        this.props.getSituation();
-    }
-
     exportFile() {
         console.log('Download Click')
         var myEle = document.getElementById('tableau');
@@ -35,8 +31,10 @@ class Table extends React.Component {
         const renderDetails = (sample,index)=>{
             var x = getDifferenceInDays(Date.parse(sample.duedate),Date.now())
             var status = ''
-            if (x <= 1){
+            if (x <= 1 && x >= 0){
                 status = 'Urgent!!'
+            }else if(x < 0 ){
+                status = '**Delay**'
             }else{
                 status = Math.round(x) + ' Days left'
             }
@@ -50,11 +48,11 @@ class Table extends React.Component {
                 <td>{sample.receive}</td>
                 <td>{sample.duedate}</td>
                 <td>{sample.shaft}<br/>({sample._shaft})</td>
-                <td>{sample.rotor}<br/>({sample._rotor})</td>
+                {/*<td>{sample.rotor}<br/>({sample._rotor})</td>
                 <td>{sample.stator}<br/>({sample._stator})</td>
                 <td>{sample.front}<br/>({sample._front})</td>
                 <td>{sample.rear}<br/>({sample._rear})</td>
-                <td>{sample.cover}<br/>({sample._cover})</td>
+            <td>{sample.cover}<br/>({sample._cover})</td>*/}
                 <td>{status}</td>
             </tr>
             )
@@ -72,11 +70,11 @@ class Table extends React.Component {
                 <th scope="col">ReceiveDate</th>
                 <th scope="col">DueDate</th>
                 <th scope="col">Shaft<br/>(status)</th>
-                <th scope="col">Rotor ass'y<br/>(status)</th>
+                {/*<th scope="col">Rotor ass'y<br/>(status)</th>
                 <th scope="col">Stator stack<br/>(status)</th>
                 <th scope="col">Front flange<br/>(status)</th>
                 <th scope="col">Rear flange<br/>(status)</th>
-                <th scope="col">Cover<br/>(status)</th>
+        <th scope="col">Cover<br/>(status)</th>*/}
                 <th scope="col">Follow up!</th>
                 </tr>
             </thead>
@@ -102,6 +100,10 @@ class Table extends React.Component {
 
                 <div className='col-sm-auto'>
                     <Link to='/chart'>Go to Chart</Link>
+                </div>
+
+                <div className='col-sm-auto'>
+                    <Link to='/calendar'>Go to Calendar</Link>
                 </div>
 
                 <div className='col-sm-auto ml-auto'>

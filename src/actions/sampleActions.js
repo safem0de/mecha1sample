@@ -1,6 +1,6 @@
 // https://stackoverflow.com/questions/52953145/maximum-value-from-firebase-firestore-collection
 import {GET_SAMPLES,SAMPLES_STATUS,GET_CHART,GET_TABLE} from '../actionTypes';
-import {convert,getDaysInMonth} from './Actions'
+import {convert,getDaysInMonth,formatDate} from './Actions'
 import {db} from '../firebase';
 
 export function getSamples(){
@@ -67,15 +67,13 @@ export function getSituation(){
 
     const getStatus = (obj,part) =>{
         var max = 0;
-        // console.log(part)
         for (var property in obj) {
             max = (max < parseFloat(property)) ? parseFloat(property) : max;
         }
         
         if(max !== 0 && obj[max].PartNo === part){
-            // console.log(obj[max].PartNo === part)
             console.log(obj[max].processinput);
-            return obj[max].processinput;
+            return formatDate(parseInt(max)) +'\n'+ obj[max].processinput;
         }else{
             return '-';
         }
@@ -106,7 +104,6 @@ export function getSituation(){
                 var _rear = ''
                 var _cover = ''
                 if (doc.exists){
-
                     no++
                     lotno = doc.id
                     zone = getData(doc.data(),"Zone");
@@ -119,13 +116,12 @@ export function getSituation(){
                     front = getDataSap(doc.data().ComponentPart,"front flange");
                     rear = getDataSap(doc.data().ComponentPart,"rear flange");
                     cover = getDataSap(doc.data().ComponentPart,"cover");
-                    // console.log(doc.data().comments)
-                    _shaft = getStatus(doc.data().comments,shaft)
-                    _rotor = getStatus(doc.data().comments,rotor)
-                    _stator = getStatus(doc.data().comments,stator)
-                    _front = getStatus(doc.data().comments,front)
-                    _rear = getStatus(doc.data().comments,rear)
-                    _cover = getStatus(doc.data().comments,cover)
+                    _shaft = getStatus(doc.data().comments,shaft);
+                    _rotor = getStatus(doc.data().comments,rotor);
+                    _stator = getStatus(doc.data().comments,stator);
+                    _front = getStatus(doc.data().comments,front);
+                    _rear = getStatus(doc.data().comments,rear);
+                    _cover = getStatus(doc.data().comments,cover);
 
                 }
                 var obj = {no,lotno,zone,issue,receive,duedate,shaft,rotor,stator,front,rear,cover,_shaft,_rotor,_stator,_front,_rear,_cover}

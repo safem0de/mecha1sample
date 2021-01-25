@@ -2,7 +2,6 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
 import _ from "lodash";
-// import { formatDate } from "../actions/Actions";
 import { saveComment } from "../actions/sampleActions";
 import { formatDate } from '../actions/Actions';
 

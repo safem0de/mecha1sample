@@ -1,8 +1,9 @@
 import React,{ Component } from 'react';
-import {getSamples} from '../actions/sampleActions';
-import {connect} from 'react-redux';
+import { getSamples } from '../actions/sampleActions';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import {Inject, ScheduleComponent,Day,Week,WorkWeek,Month,Agenda} from '@syncfusion/ej2-react-schedule';
+import Footer from './Footer';
+import { Inject, ScheduleComponent,Day,Week,WorkWeek,Month,Agenda } from '@syncfusion/ej2-react-schedule';
 
 class Calendar extends Component{
 
@@ -35,7 +36,20 @@ class Calendar extends Component{
         <Inject services={[Day,Week,WorkWeek,Month,Agenda]}/>
       </ScheduleComponent>
       <hr/>
-            <Link to='/all'>Back</Link>
+      <Footer>
+      <div className='col-sm-auto'>
+        <Link to='/login'>Go to Login</Link>
+      </div>
+
+      <div className='col-sm-auto'>
+        <Link to='/table'>Go to Sample Situation</Link>
+      </div>
+
+      <div className='col-sm-auto'>
+        <Link to='/chart'>Go to Chart</Link>
+      </div>
+
+      </Footer>
       </div>
     );
   }
