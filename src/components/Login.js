@@ -54,6 +54,10 @@ class Login extends Component {
                     <div className='col-sm-auto'>
                         <Link to='/table'>Go to Sample Situation</Link>
                     </div>
+
+                    <div className='col-sm-auto'>
+                        <Link to='/calendar'>Go to Calendar</Link>
+                    </div>
                 </Footer>
             </div>
         )
