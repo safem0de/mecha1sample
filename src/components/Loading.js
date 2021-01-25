@@ -9,9 +9,9 @@ class Loading extends Component{
 
     componentWillMount(){
         const {userLoading,samplesLoading} = this.props;
-        var x = new Date(Date.now()).toLocaleString('en-us', { month: 'long' });
-        this.props.getSampleGraph(x,['Receive','Confirm','Shipment']);
-        this.props.getSituation();
+        // var x = new Date(Date.now()).toLocaleString('en-us', { month: 'long' });
+        // this.props.getSampleGraph(x,['Receive','Confirm','Shipment']);
+        // this.props.getSituation();
         
         if (samplesLoading === undefined){
             this.props.getSamples();

@@ -8,6 +8,11 @@ import { getSampleGraph } from "../actions/sampleActions";
 import { connect } from 'react-redux';
 
 class SampleChart extends Component {
+  
+  componentDidMount(){
+    var x = new Date(Date.now()).toLocaleString('en-us', { month: 'long' });
+    this.props.getSampleGraph(x,['Receive','Confirm','Shipment']);
+  }
 
   render() {
     const {chart} = this.props

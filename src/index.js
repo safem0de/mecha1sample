@@ -36,11 +36,11 @@ ReactDOM.render(
           <Route path='/process/:id/:sap' component={ProcessInput} exact={true}/>
           <Route path='/chart' component={SampleChart} exact={true}/>
           <Route path='/table' component={Table} exact={true}/>
+          <Route path='/calendar' component={Calendar} exact={true}/>
           <Authenticate>
           <Header/>
             <Route path='/' component={App} exact={true}/>
             <Route path='/all' component={All} exact={true}/>
-            <Route path='/calendar' component={Calendar} exact={true}/>
             <Route path='/all/:id' component={SampleLotDetail} exact={true}/>
             <Route path='/print/:id' component={Example} exact={true}/>
           </Authenticate>

@@ -11,14 +11,13 @@ class Table extends React.Component {
 
     constructor(props){
         super(props)
-
         this.renderSample = this.renderSample.bind(this);
         this.exportFile = this.exportFile.bind(this);
     }
 
-    // componentDidMount(){
-    //     this.props.getSituation();
-    // }
+    componentDidMount(){
+        this.props.getSituation();
+    }
 
     exportFile() {
         console.log('Download Click')
