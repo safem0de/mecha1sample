@@ -15,7 +15,8 @@ import rootReducer from './reducers';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Calendar from './components/Calendar';
 import All from './components/All';
-import Loading from './components/Loading';
+// import Loading from './components/Loading';
+import Loadingz from './components/Loadingz';
 import Login from './components/Login';
 import Authenticate from './components/Authenticate';
 import SampleLotDetail from './components/SampleLotDetail';
@@ -30,7 +31,7 @@ ReactDOM.render(
   // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-      <Loading>
+      <Loadingz>
         <Switch>
           <Route path='/login' component={Login} exact={true}/>
           <Route path='/process/:id/:sap' component={ProcessInput} exact={true}/>
@@ -45,7 +46,7 @@ ReactDOM.render(
             <Route path='/print/:id' component={Example} exact={true}/>
           </Authenticate>
         </Switch>
-        </Loading>
+        </Loadingz>
       </BrowserRouter>
     </Provider>
   // </React.StrictMode>
