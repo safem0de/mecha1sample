@@ -2,25 +2,31 @@
 import {useState,useEffect} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {getSamples} from '../actions/sampleActions';
-// import {getSamples,getSampleGraph,getSituation} from '../actions/sampleActions';
-// import {getUser} from '../actions/userActions';
+import {getSamples,getSampleGraph,getSituation} from '../actions/sampleActions';
+import {getUser} from '../actions/userActions';
 
-const Loadingz = (props) =>{
+const Loadingz = (props,state) =>{
 
-    const [state,setState]= useState('')
-    const [loading,setLoading]= useState('')
+    const [loading,setLoading]= useState(true)
     const [jsx,setJsx]= useState('')
 
     const loadPage = () => {
         if (state.samplesLoading === undefined){
             props.getSamples();
         }
+
+        if (state.userLoading === undefined){
+            props.getUser();
+        }
+
+        if((!state.userLoading && !state.samplesLoading )||props.user === null){
+            setLoading(false)
+        }
     }
 
     useEffect(()=>{
-        loadPage()
-    },[loading]);
+        loadPage();
+    },[]);
 
     return loading?jsx:null;
 }
@@ -33,4 +39,4 @@ function mapStateToProps(state){
     }
 }
 
-export default withRouter (connect(mapStateToProps,{getSamples})(Loadingz));
+export default withRouter (connect(mapStateToProps,{getSamples,getUser})(Loadingz));
