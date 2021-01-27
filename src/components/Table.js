@@ -30,12 +30,13 @@ class Table extends React.Component {
 
         const renderDetails = (sample,index)=>{
             var x = getDifferenceInDays(Date.parse(sample.duedate),Date.now())
+            // console.log(x)
             var status = ''
             if (x <= 1 && x >= 0){
                 status = 'Urgent!!'
             }else if(x < 0 ){
-                status = '**Delay**'
-            }else{
+                status = '** Delay **'
+            }else if(x > 1){
                 status = Math.round(x) + ' Days left'
             }
 
