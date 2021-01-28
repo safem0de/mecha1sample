@@ -7,7 +7,7 @@ import {getSamples,getSampleGraph,getSituation} from '../actions/sampleActions';
 import {getUser} from '../actions/userActions';
 
 const Loadingz = (props,state) =>{
-    const [loading,setLoading]=useState(true)
+
     const [jsx,setJsx]= useState(
         <div className='d-flex justify-content-center'>
             <h2>Loading...</h2>
@@ -15,6 +15,7 @@ const Loadingz = (props,state) =>{
     )
 
     const loadPage = () => {
+
         if (state.samplesLoading === undefined){
             props.getSamples();
         }
@@ -38,15 +39,12 @@ const Loadingz = (props,state) =>{
                     {props.children}
                 </div>
             )
-            setLoading(false)
         }
-
-        return loading
     }
 
     useEffect(()=>{
         loadPage();
-    },[loading]);
+    },[]);
 
     return jsx;
 }
